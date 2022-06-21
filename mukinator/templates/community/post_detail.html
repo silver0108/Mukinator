@@ -6,6 +6,18 @@
 </div>
 <form action="{% url 'community:comment_create' post.id %}" method="post">
 {% csrf_token %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+        {% for field in form %}
+        {% if field.errors %}
+        <div>
+            <strong>{{ field.label }}</strong>
+            {{ field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+</div>
+{% endif %}
 <textarea name="content" id="content" rows="15"></textarea>
 <input type="submit" value="댓글등록">
 </form>

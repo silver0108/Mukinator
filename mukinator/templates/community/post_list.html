@@ -1,9 +1,59 @@
+{% load community_filter %}
+<h5>로그인/회원가입</h5>
+<a href="#">로그인</a>
+<a href="#">회원가입</a>
+
+<h5>게시물</h5>
 {% if post_list %}
     <ul>
     {% for post in post_list %}
-        <li><a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a></li>
+        <li>
+            {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
+            <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
+            <span class="text-danger small mx-2">{{ post.comment_set.count }}</span> <!-- 댓글 개수 -->
+        </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>게시글이 없습니다.</p>
 {% endif %}
+<a href="{% url 'community:post_create' %}">게시글 등록하기</a>
+
+<h5>페이지네이션</h5>
+<!-- 페이징처리 시작 -->
+    <div>
+        <!-- 이전페이지 -->
+        {% if post_list.has_previous %}
+        <li>
+            <a href="?page={{ post_list.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li>
+            <a tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in post_list.paginator.page_range %}
+        {% if page_number == post_list.number %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if post_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </div>
+    <!-- 페이징처리 끝 -->
+<br>
