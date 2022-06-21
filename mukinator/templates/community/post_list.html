@@ -1,7 +1,12 @@
 {% load community_filter %}
 <h5>로그인/회원가입</h5>
-<a href="#">로그인</a>
-<a href="#">회원가입</a>
+{% if user.is_authenticated %}
+    <a href="{% url 'common:logout' %}">{{ user.username }}님 안녕하세요! (로그아웃)</a>
+    {% else %}
+    <a href="{% url 'common:login' %}">로그인</a>
+    <br>
+    <a href="{% url 'common:signup' %}">회원가입</a>
+    {% endif %}
 
 <h5>게시물</h5>
 {% if post_list %}
@@ -11,6 +16,7 @@
             {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
             <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
             <span class="text-danger small mx-2">{{ post.comment_set.count }}</span> <!-- 댓글 개수 -->
+            {{ post.author.username }}
         </li>
     {% endfor %}
     </ul>
