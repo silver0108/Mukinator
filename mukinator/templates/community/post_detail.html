@@ -1,0 +1,19 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<h1>{{ post.subject }}</h1>
+<div>
+    {{ post.content }}
+</div>
+<form action="{% url 'community:comment_create' post.id %}" method="post">
+{% csrf_token %}
+<textarea name="content" id="content" rows="15"></textarea>
+<input type="submit" value="댓글등록">
+</form>
+<h5>{{ post.comment_set.count }}개의 댓글이 있습니다.</h5>
+<div>
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li>{{ comment.content }}</li>
+    {% endfor %}
+    </ul>
+</div>

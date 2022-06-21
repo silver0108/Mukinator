@@ -1,0 +1,9 @@
+{% if post_list %}
+    <ul>
+    {% for post in post_list %}
+        <li><a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>게시글이 없습니다.</p>
+{% endif %}
