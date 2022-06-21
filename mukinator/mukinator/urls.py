@@ -1,8 +1,9 @@
+from django import views
 from django.contrib import admin
 from django.urls import path, include
-from muki_main.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name="home"),
+    path('', include('muki_main.urls')),
+    path('community/', include('community.urls')),
 ]

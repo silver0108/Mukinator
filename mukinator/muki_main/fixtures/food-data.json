@@ -3,22 +3,122 @@
         "model":"muki_main.food",
         "fields":{
             "food_name":"새우볶음밥",
-            "main":"밥",
-            "soup":"볶음",
-            "meat":"해물",
-            "spicy":"안매움",
-            "oily":"느끼" 
+            "meat":"False",
+            "sea":"True",
+            "ulken":"False",
+            "raw":"False",
+            "spicy":"False" 
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
             "food_name":"마라탕",
-            "main":"국",
-            "soup":"국",
-            "meat":"고기",
-            "spicy":"매움",
-            "oily":"느끼" 
+            "meat":"True",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"True"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"라면",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"True"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"짬뽕",
+            "meat":"False",
+            "sea":"True",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"True"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"부대찌개",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"True"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"매운탕",
+            "meat":"False",
+            "sea":"True",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"True"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"우동",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"False",
+            "raw":"False",
+            "spicy":"False"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"해장국",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"False"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"설렁탕",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"False"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"라멘",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"False"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"만두국",
+            "meat":"False",
+            "sea":"False",
+            "ulken":"True",
+            "raw":"False",
+            "spicy":"False"
         }
     }
+
 ]
