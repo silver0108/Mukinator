@@ -4,4 +4,5 @@ from .models import Food
 admin.site.register(Food)
 
 class NoticeAdmin(admin.ModelAdmin):
-    list_display = ['meat', 'sea', 'ulken', 'raw', 'spicy']
+    list_display = ['meat', 'sea', 'spicy', 'country']
+    

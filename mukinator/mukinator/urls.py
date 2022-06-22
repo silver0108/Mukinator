@@ -4,6 +4,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('muki_main.urls')),
+    path('food/', include('muki_main.urls')),
     path('community/', include('community.urls')),
 ]
