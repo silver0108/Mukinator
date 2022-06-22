@@ -1,0 +1,31 @@
+<h1>테스트 3 화면</h1>
+<p1>맵기 고르기<p1>
+
+<form method="GET" action="{%url 'sort_food' %}">
+    <!--
+    <button type="submit" value=True name="meat">고기</button>
+    <button type="submit" value=False name="meat">안고기</button>
+    <button type="submit" value=True name="sea">해산물</button>
+    <button type="submit" value="한식" name="country">한식</button>
+    <button type="submit" value="중식" name="country">중식</button>
+    <button type="submit" value="일식" name="country">일식</button>
+    <button type="submit" value="기타" name="country">기타</button>
+    -->
+    <button type="submit" value=True name="hot">매운것</button>
+    <button type="submit" value=False name="hot">안매운것</button>
+    <button type="submit" value=True name="reset">리셋</button>
+
+</form>
+<hr>
+
+{% if sort_foods%}
+    {% for food in sort_foods %}
+    <h4>{{food.food_name}}</h4>
+    고기{{food.meat}}
+    해산물{{food.sea}}
+    매움{{food.spicy}}
+    {{food.country}}
+    {% endfor %}
+{% else %}
+    <h4>결과가  없습니다. 상단의 리셋 버튼을 눌러주세요.</h4>
+{% endif %}
