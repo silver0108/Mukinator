@@ -9,7 +9,6 @@ class Food(models.Model):
     sea = models.BooleanField(default=False, verbose_name="해산물")
     spicy = models.BooleanField(default=False, verbose_name="매움")
     country = models.CharField(max_length=2, verbose_name="국가") 
-
     def __str__(self):
         return self.food_name
 

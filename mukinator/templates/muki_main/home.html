@@ -1,0 +1,13 @@
+<h1> 홈 </h1>
+<p1>시작<p1>
+<form method="GET" action="{%url 'start' %}">
+    <button type="submit" value=True name="start">시작</button>
+</form>
+
+{% for food in foods %}
+    <h4>{{food.food_name}}</h4>
+    고기{{food.meat}}
+    해산물{{food.sea}}
+    매움{{food.spicy}}
+    {{food.country}}
+{% endfor %}

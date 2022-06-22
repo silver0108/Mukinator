@@ -1,0 +1,17 @@
+<h1> 결과 </h1>
+<p1>결과<p1>
+<form method="GET" action="{%url 'sort_food' %}">
+    <button type="submit" value=True name="reset">다시하기</button>
+
+</form>
+{% if sort_foods%}
+    {% for food in sort_foods %}
+    <h4>{{food.food_name}}</h4>
+    고기{{food.meat}}
+    해산물{{food.sea}}
+    매움{{food.spicy}}
+    {{food.country}}
+    {% endfor %}
+{% else %}
+    <h4>결과가  없습니다. 상단의 리셋 버튼을 눌러주세요.</h4>
+{% endif %}
