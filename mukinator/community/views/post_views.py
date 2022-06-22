@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from ..forms import PostForm
-from ..models import Post
+from ..models import Post, Photo
 
 
 @login_required(login_url='common:login')
@@ -15,6 +15,11 @@ def post_create(request):
             post.author = request.user
             post.create_date = timezone.now()
             post.save()
+            for img in request.FILES.getlist('imgs'):
+                photo = Photo()
+                photo.post = post
+                photo.image = img
+                photo.save()
             return redirect('community:index')
     else:
         form = PostForm()

@@ -1,6 +1,6 @@
 <h1>게시물 등록</h1>
 <br>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
         {% csrf_token %}
          <!-- 오류표시 Start -->
         {% if form.errors %}
@@ -22,9 +22,21 @@
                    value="{{ form.subject.value|default_if_none:'' }}">
         </div>
         <div class="mb-3">
+            <label class="form-label">제목</label>
+            <input type="file" name="imgs" multiple>
+            <span/>
+            <input type="file" name="imgs" multiple>
+            <span/>
+            <input type="file" name="imgs" multiple>
+        </div>
+        <div class="mb-3">
             <label for="content" class="form-label">내용</label>
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
+        <div class="mb-3">
+            <label class="form-label">지역</label>
+            {{ form.region }}
+        </div>
         <button type="submit">저장하기</button>
-    </form>
+</form>

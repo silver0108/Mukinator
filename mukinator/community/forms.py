@@ -5,10 +5,11 @@ from community.models import Post, Comment
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['subject', 'content']
+        fields = ['subject', 'content', 'region']
         labels = {
             'subject': '제목',
             'content': '내용',
+            'region': '지역',
         }
 
 

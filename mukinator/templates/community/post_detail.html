@@ -9,9 +9,16 @@
     {% endfor %}
     </div>
     {% endif %}
+<!-- 조회수 1 추가 -->
+{{ post.update_counter }}
 <!--게시글 정보 -->
 <h1>{{ post.subject }}</h1>
-<h5>글 내용</h5>
+<h5>이미지와 글 내용</h5>
+{% for photo in post.photo_set.all%}
+    <img src="{{photo.image.url}}" width="200">
+    <br>
+    <br>
+{% endfor %}
 <div>
     {{ post.content }}
 </div>
@@ -19,6 +26,8 @@
 {{ post.create_date }}
 <h5>작성자</h5>
 {{ post.author.username }}
+<h5>조회수</h5>
+{{ post.hit }}
 <br>
 <!-- 게시글 수정버튼 -->
 {% if request.user == post.author %}

@@ -1,4 +1,5 @@
 {% load community_filter %}
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 <h5>로그인/회원가입</h5>
 {% if user.is_authenticated %}
     <a href="{% url 'common:logout' %}">{{ user.username }}님 안녕하세요! (로그아웃)</a>
@@ -20,15 +21,27 @@
 </form>
 </div>
 
+<h5>지역 셀렉트박스</h5>
+<select id="sort-select" onchange="location = this.value;">
+  <option class="sort-all" value="?sort=all">전체</option>
+  <option class="sort-seoul" value="?sort=seoul">서울</option>
+  <option class="sort-suwon" value="?sort=suwon">수원</option>
+  <option class="sort-yongin" value="?sort=yongin">용인</option>
+  <option class="sort-busan" value="?sort=busan">부산</option>
+  <option class="sort-gimhae" value="?sort=gimhae">김해</option>
+</select>
+
 <h5>게시물</h5>
 {% if post_list %}
     <ul>
     {% for post in post_list %}
         <li>
+            {{ post.region}} <!-- 지역 -->
             {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
             <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
-            <span class="text-danger small mx-2">{{ post.comment_set.count }}</span> <!-- 댓글 개수 -->
-            {{ post.author.username }}
+            {{ post.comment_set.count }} <!-- 댓글 개수 -->
+            {{ post.author.username }} <!-- 작성자 -->
+            {{ post.hit }} <!-- 조회수 -->
         </li>
     {% endfor %}
     </ul>
@@ -92,5 +105,37 @@ btn_search.addEventListener('click', function() {
     document.getElementById('kw').value = document.getElementById('search_kw').value;
     document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
     document.getElementById('searchForm').submit();
+});
+// get url query string
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+// 정렬방식 셀렉트 박스 유지
+$(document).ready(function(){
+  var sort = getUrlParameter('sort');
+  if(sort == 'seoul'){
+    $('.sort-seoul').prop('selected', 'selected')
+  }else if(sort == 'suwon'){
+    $('.sort-suwon').prop('selected', 'selected')
+  }else if(sort == 'yongin'){
+    $('.sort-yongin').prop('selected', 'selected')
+  }else if(sort == 'busan'){
+    $('.sort-busan').prop('selected', 'selected')
+  }else if(sort == 'gimhae'){
+    $('.sort-gimhae').prop('selected', 'selected')
+  }else{
+    $('.sort-all').prop('selected', 'selected')
+  }
 });
 </script>
