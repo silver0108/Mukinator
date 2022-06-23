@@ -31,8 +31,10 @@ def update(request):
     return render(request, 'common/user_update.html', {'form': form})
 
 
-def mypage(request):
-    user = get_user_model()
-    context = {'user': user}
+def mypage(request, username):
+    User = get_user_model()
+    profile = get_object_or_404(User, username = username)
+    context = {'profile': profile}
+    
     return render(request, 'common/mypage.html', context)
 
