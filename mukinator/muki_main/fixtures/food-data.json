@@ -4,9 +4,10 @@
         "fields":{
             "food_name":"매운갈비찜",
             "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"한식",
+            "meat_type":"소"
         }
     },
     {
@@ -14,9 +15,21 @@
         "fields":{
             "food_name":"닭볶음탕",
             "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"한식",
+            "meat_type":"닭"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"돼지등갈비찜",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"True",
+            "country":"한식",
+            "meat_type":"돼지"
         }
     },
     {
@@ -24,19 +37,32 @@
         "fields":{
             "food_name":"삼겹살",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meat_type":"돼지"
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"보쌈",
+            "food_name":"불고기",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meat_type":"소"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"삼계탕",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meat_type":"닭"
         }
     },
     {
@@ -44,19 +70,21 @@
         "fields":{
             "food_name":"김치찌개",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"한식",
+            "meal_type":"기타"
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"떡볶이",
+            "food_name":"불닭볶음면",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"한식",
+            "meal_type":"면"
         }
     },
     {
@@ -64,19 +92,32 @@
         "fields":{
             "food_name":"비빔밥",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meal_type":"밥"
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"김밥",
+            "food_name":"전",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meal_type":"기타"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"칼국수",
+            "meat":"False",
+            "seafood":"False",
+            "hot":"False",
+            "country":"한식",
+            "meal_type":"면"
         }
     },
     {
@@ -84,9 +125,11 @@
         "fields":{
             "food_name":"해물찜",
             "meat":"False",
-            "sea":"True",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"True",
+            "hot":"True",
+            "country":"한식",
+            "seafood_type":"종합"
+
         }
     },
     {
@@ -94,9 +137,11 @@
         "fields":{
             "food_name":"매운탕",
             "meat":"False",
-            "sea":"True",
-            "spicy":"True",
-            "country":"한식"
+            "seafood":"True",
+            "hot":"True",
+            "country":"한식",
+            "seafood_type":"생선"
+
         }
     },
     {
@@ -104,9 +149,10 @@
         "fields":{
             "food_name":"조개구이",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"True",
+            "hot":"False",
+            "country":"한식",
+            "seafood_type":"어패"
         }
     },
     {
@@ -114,9 +160,11 @@
         "fields":{
             "food_name":"물회",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"한식"
+            "seafood":"True",
+            "hot":"False",
+            "country":"한식",
+            "seafood_type":"생선"
+
         }
     },
     {
@@ -124,9 +172,10 @@
         "fields":{
             "food_name":"마파두부",
             "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"중식",
+            "meat_type":"돼지"
         }
     },
     {
@@ -134,9 +183,21 @@
         "fields":{
             "food_name":"마라탕",
             "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"중식",
+            "meat_type":"소"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"깐풍기",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"True",
+            "country":"중식",
+            "meat_type":"닭"
         }
     },
     {
@@ -144,19 +205,31 @@
         "fields":{
             "food_name":"만두",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"중식",
+            "meat_type":"돼지"
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"탕수육",
+            "food_name":"유린기",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"중식",
+            "meat_type":"닭"
+        }
+    },{
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"중국식소고기볶음",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"False",
+            "country":"중식",
+            "meat_type":"소"
         }
     },
     {
@@ -164,9 +237,10 @@
         "fields":{
             "food_name":"짬뽕",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"중식",
+            "meal_type":"면"
         }
     },
     {
@@ -174,9 +248,10 @@
         "fields":{
             "food_name":"고추잡채",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"중식",
+            "meal_type":"기타"
         }
     },
     {
@@ -184,9 +259,10 @@
         "fields":{
             "food_name":"짜장면",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"중식",
+            "meal_type":"면"
         }
     },
     {
@@ -194,9 +270,10 @@
         "fields":{
             "food_name":"잡채밥",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"중식",
+            "meal_type":"밥"
         }
     },
     {
@@ -204,9 +281,11 @@
         "fields":{
             "food_name":"생선탕수",
             "meat":"False",
-            "sea":"True",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"True",
+            "hot":"True",
+            "country":"중식",
+            "seafood_type":"생선"
+
         }
     },
     {
@@ -214,9 +293,10 @@
         "fields":{
             "food_name":"해파리냉채",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"True",
+            "hot":"False",
+            "country":"중식",
+            "seafood_type":"기타"
         }
     },
     {
@@ -224,9 +304,10 @@
         "fields":{
             "food_name":"새우볶음밥",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"중식"
+            "seafood":"True",
+            "hot":"False",
+            "country":"중식",
+            "seafood_type":"어패"
         }
     },
     {
@@ -234,9 +315,10 @@
         "fields":{
             "food_name":"돈카츠",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"일식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"일식",
+            "meat_type":"돼지"
         }
     },
     {
@@ -244,9 +326,21 @@
         "fields":{
             "food_name":"스키야키",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"일식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"일식",
+            "meat_type":"소"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"오야꼬동",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"False",
+            "country":"일식",
+            "meat_type":"닭"
         }
     },
     {
@@ -254,9 +348,10 @@
         "fields":{
             "food_name":"일본식탄탄멘",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"일식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"일식",
+            "meal_type":"면"
         }
     },
     {
@@ -264,9 +359,10 @@
         "fields":{
             "food_name":"김치나베",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"중식"
+            "seafood":"False",
+            "hot":"True",
+            "country":"일식",
+            "meal_type":"기타"
         }
     },
     {
@@ -274,19 +370,10 @@
         "fields":{
             "food_name":"라멘",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"일식"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
-            "food_name":"소바",
-            "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"일식"
+            "seafood":"False",
+            "hot":"False",
+            "country":"일식",
+            "meal_type":"면"
         }
     },
     {
@@ -294,9 +381,11 @@
         "fields":{
             "food_name":"초밥",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"일식"
+            "seafood":"True",
+            "hot":"False",
+            "country":"일식",
+            "seafood_type":"생선"
+
         }
     },
     {
@@ -304,29 +393,11 @@
         "fields":{
             "food_name":"카이센동",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"일식"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
-            "food_name":"칠리콘카르네",
-            "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"기타"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
-            "food_name":"내슈빌핫치킨",
-            "meat":"True",
-            "sea":"False",
-            "spicy":"True",
-            "country":"기타"
+            "seafood":"True",
+            "hot":"False",
+            "country":"일식",
+            "seafood_type":"종합"
+
         }
     },
     {
@@ -334,19 +405,32 @@
         "fields":{
             "food_name":"스테이크",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"False",
+            "hot":"False",
+            "country":"기타",
+            "meat_type":"소"
         }
     },
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"뵈프부르기뇽",
+            "food_name":"베이비백립",
             "meat":"True",
-            "sea":"False",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"False",
+            "hot":"False",
+            "country":"기타",
+            "meat_type":"돼지"
+        }
+    },
+    {
+        "model":"muki_main.food",
+        "fields":{
+            "food_name":"닭가슴살스테이크",
+            "meat":"True",
+            "seafood":"False",
+            "hot":"False",
+            "country":"기타",
+            "meat_type":"닭"
         }
     },
     {
@@ -354,19 +438,10 @@
         "fields":{
             "food_name":"타코",
             "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"기타"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
-            "food_name":"똠양꿍",
-            "meat":"False",
-            "sea":"False",
-            "spicy":"True",
-            "country":"기타"
+            "seafood":"False",
+            "hot":"True",
+            "country":"기타",
+            "meal_type":"기타"
         }
     },
     {
@@ -374,9 +449,10 @@
         "fields":{
             "food_name":"파스타",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"False",
+            "hot":"False",
+            "country":"기타",
+            "meal_type":"면"
         }
     },
     {
@@ -384,9 +460,10 @@
         "fields":{
             "food_name":"피자",
             "meat":"False",
-            "sea":"False",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"False",
+            "hot":"False",
+            "country":"기타",
+            "meal_type":"기타"
         }
     },
     {
@@ -394,19 +471,10 @@
         "fields":{
             "food_name":"칠리크랩",
             "meat":"False",
-            "sea":"True",
-            "spicy":"True",
-            "country":"기타"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
-            "food_name":"락사",
-            "meat":"False",
-            "sea":"True",
-            "spicy":"True",
-            "country":"기타"
+            "seafood":"True",
+            "hot":"True",
+            "country":"기타",
+            "seafood_type":"어패"
         }
     },
     {
@@ -414,9 +482,11 @@
         "fields":{
             "food_name":"랍스터",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"True",
+            "hot":"False",
+            "country":"기타",
+            "seafood_type":"어패"
+
         }
     },
     {
@@ -424,9 +494,11 @@
         "fields":{
             "food_name":"연어스테이크",
             "meat":"False",
-            "sea":"True",
-            "spicy":"False",
-            "country":"기타"
+            "seafood":"True",
+            "hot":"False",
+            "country":"기타",
+            "seafood_type":"생선"
+
         }
     }
 ]

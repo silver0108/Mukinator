@@ -1,11 +1,11 @@
 <h1>고기 고르기</h1>
-<p>고기입니까?</p>
+<p>무슨 고기 입니까</p>
 
 <form method="POST" action="{%url 'sort_food' %}">
     {% csrf_token %}
-    <button type="submit" value=True name="meat">네</button>
-    <button type="submit" value=False name="meat">아니요</button>
-    <button type="submit" value=True name="seafood">해산물입니다.</button>
+    <button type="submit" value="돼지" name="meat_type">돼지</button>
+    <button type="submit" value="소" name="meat_type">소</button>
+    <button type="submit" value="닭" name="meat_type">닭</button>
 </form>
 
 <form method="GET" action="{%url 'reset' %}">
