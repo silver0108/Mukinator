@@ -1,6 +1,7 @@
 <h1> 홈 </h1>
-<p1>시작<p1>
-<form method="GET" action="{%url 'start' %}">
+
+<form method="POST" action="{%url 'start' %}">
+    {% csrf_token %}
     <button type="submit" value=True name="start">시작</button>
 </form>
 
