@@ -3,9 +3,7 @@
 <h5>로그인/회원가입/마이페이지</h5>
 {% if user.is_authenticated %}
     <a href="{% url 'common:logout' %}">{{ user.username }}님 안녕하세요! (로그아웃)</a>
-    <br>
-    <a href="{% url 'common:mypage' user.username %}">마이페이지</a>
-   
+    <a href="{% url 'common:mypage' pk=user.pk %}">마이페이지</a>
     {% else %}
     <a href="{% url 'common:login' %}">로그인</a>
     <br>
