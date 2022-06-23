@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.db import reset_queries
 
 from .models import Food
+from community.views.base_views import index
 import random
 
 
@@ -14,12 +15,11 @@ number = ['1', '2', '3']
 
 def home(request):
     foods = Food.objects.all()
-    print(number)
-    print(reset_number)
     return render(request, 'muki_main/home.html', {'foods':foods})
 
 def start(request):
-    if 'start' in request.GET:
+    
+    if 'start' in request.POST:
         integer = random.choice(number)
         number.remove(integer)
         test_str = 'test'+ integer + '.html'
@@ -29,14 +29,8 @@ def start(request):
         
         return render(request, 'muki_main/' + test_str , qlist)
     
-def sort_food(request):
-    global number
+def reset(request):
     
-    if "sort_foods" in qlist: #필터링 한 데이터 검사
-        sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
-    else:
-        sort_foods = Food.objects.all() #없으면 Food 모델 다 가져오기
-        
     if 'reset' in request.GET: #초기화
         sort_foods = Food.objects.all()
         qlist['sort_foods'] = sort_foods
@@ -44,92 +38,44 @@ def sort_food(request):
         for i in range(1,4):
             number.append(str(i))
         
-        return redirect(home)    
+        return redirect(home)  
+        
+def sort_food(request):
+    global number
     
-    #고기
-    if 'meat' in request.GET and len(number) > 0: #3번까지 질문하기
-        meat = request.GET['meat']
-        if meat:
-            sort_foods = sort_foods.filter(Q(meat=meat))
-            qlist['sort_foods'] = sort_foods
-            
-            integer = random.choice(number)
-        
-            if len(number) != 0:
-                number.remove(integer)
-            test_str = 'test'+ integer + '.html'
-            
-            return render(request, 'muki_main/' + test_str , qlist)
-        
-    elif 'meat' in request.GET and len(number) == 0:
-        meat = request.GET['meat']
-        if meat:
-            sort_foods = sort_foods.filter(Q(meat=meat))
-            qlist['sort_foods'] = sort_foods
-        return render(request, 'muki_main/result.html', qlist)
     
-    #맵기
-    if 'hot' in request.GET and len(number) > 0:
-        hot = request.GET['hot']
-        if hot:
-            sort_foods = sort_foods.filter(Q(spicy=hot))
-            qlist['sort_foods'] = sort_foods
-            
-            integer = random.choice(number)
-            
-            if len(number) != 0:
-                number.remove(integer)
-            test_str = 'test'+ integer + '.html'
-            
-            return render(request, 'muki_main/' + test_str, qlist)
-        
-    elif 'hot' in request.GET and len(number) == 0:
-        hot = request.GET['hot']
-        if hot:
-            sort_foods = sort_foods.filter(Q(spicy=hot))
-            qlist['sort_foods'] = sort_foods
-        return render(request, 'muki_main/result.html', qlist)
+    if 'sort_foods' in qlist: #필터링 한 데이터 검사
+        sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
+    else:
+        sort_foods = Food.objects.all() #없으면 Food 모델 다 가져오기
     
-    #해산물
-    if 'sea' in request.GET and len(number) > 0:
-        sea = request.GET['sea']
-        if sea:
-            sort_foods = sort_foods.filter(Q(sea=sea))
-            qlist['sort_foods'] = sort_foods
-            
-            integer = random.choice(number)
-            
-            if len(number) != 0:
-                number.remove(integer)
-            test_str = 'test'+ integer + '.html'
-            
-            return render(request, 'muki_main/' + test_str, qlist)
+    if request.method == 'POST':
+        keys = list(request.POST.keys())
+        model_name = keys[1]
         
-    elif 'sea' in request.GET and len(number) == 0:
-        sea = request.GET['sea']
-        if sea:
-            sort_foods = sort_foods.filter(Q(sea=sea))
-            qlist['sort_foods'] = sort_foods
-        return render(request, 'muki_main/result.html', qlist)
+        if model_name in request.POST and len(number) > 0: #3번까지 질문하기
+            value = request.POST[model_name]
+           
+            if value:
+                sort_foods = sort_foods.filter(**{model_name: value})
+                qlist['sort_foods'] = sort_foods
+                
+                integer = random.choice(number)
+            
+                if len(number) != 0:
+                    number.remove(integer)
+                test_str = 'test'+ integer + '.html'
+                
+                return render(request, 'muki_main/' + test_str , qlist)
+            
+        elif model_name in request.POST and len(number) == 0:
+            value = request.POST[model_name]
+            if value:
+                sort_foods = sort_foods.filter(**{model_name: value})
+                qlist['sort_foods'] = sort_foods
+            return render(request, 'muki_main/result.html', qlist)
+        
     
-    #국가별    
-    if 'country' in request.GET and len(number) > 0:
-        country = request.GET['country']
-        if country:
-            sort_foods = sort_foods.filter(Q(country=country))
-            qlist['sort_foods'] = sort_foods
-            
-            integer = random.choice(number)
-            
-            if len(number) > 0:
-                number.remove(integer)
-            test_str = 'test'+ integer + '.html'
-            
-            return render(request, 'muki_main/' + test_str, qlist)
-        
-    elif 'country' in request.GET and len(number) == 0:
-        country = request.GET['country']
-        if country:
-            sort_foods = sort_foods.filter(Q(country=country))
-            qlist['sort_foods'] = sort_foods
-        return render(request, 'muki_main/result.html', qlist)
+def go_board(request):
+    if 'go_board' in request.GET:
+        return redirect(index)
