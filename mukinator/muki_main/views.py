@@ -1,11 +1,4 @@
-from pyexpat import model
-from xmlrpc.client import boolean
-from ast import keyword
-from django.http import QueryDict
-from django.shortcuts import render,redirect, get_object_or_404
-from django.db.models import Q
-from django.db import reset_queries
-
+from django.shortcuts import render,redirect
 from .models import Food
 from community.views.base_views import index
 import random
@@ -48,8 +41,6 @@ def reset(request):
         
 def sort_food(request):
     
-    print(number, specific_number)
-
     if 'sort_foods' in qlist: #필터링 한 데이터 검사
         sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
     else:
@@ -63,20 +54,15 @@ def sort_food(request):
         
         if model_name == "meat" :
             if value == "True":
-                print("meat")
                 specific_number.remove('5')
                 specific_number.remove('6')
-                print(specific_number)
             else:
-                print("meal")
                 specific_number.remove('4')
                 specific_number.remove('6')
               
         elif model_name == "seafood":
-            print("seafood")
             specific_number.remove('4')
             specific_number.remove('5')
-            print(specific_number)
             
         if value:
             sort_foods = sort_foods.filter(**{model_name: value})
@@ -86,10 +72,12 @@ def sort_food(request):
                 integer = random.choice(number)
                 number.remove(integer)
                 test_str = 'test'+ integer + '.html'
+                
             elif len(number) == 0 and len(specific_number) != 1:
                 integer = random.choice(specific_number)
                 specific_number.remove(integer)
                 test_str = 'test'+ integer + '.html'
+                
             elif len(specific_number) == 1:
                 integer = random.choice(specific_number)
                 test_str = 'test'+ integer + '.html'
@@ -104,5 +92,12 @@ def sort_food(request):
             return render(request, 'muki_main/' + test_str , qlist)
     
 def go_board(request):
+    number.clear()
+    for i in range(1,4):
+        number.append(str(i))
+            
+    specific_number.clear()
+    for i in range(4,7):
+        specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
