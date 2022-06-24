@@ -1,0 +1,60 @@
+{% load community_filter %}
+<h5>내가 쓴 글</h5>
+{% if post_list %}
+    <ul>
+    {% for post in post_list %}
+        {% if request.user == post.author %}
+        <li>
+            {{ post.region}} <!-- 지역 -->
+            {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
+            <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
+            {{ post.comment_set.count }} <!-- 댓글 개수 -->
+            {{ post.author.username }} <!-- 작성자 -->
+            {{ post.hit }} <!-- 조회수 -->
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>게시글이 없습니다.</p>
+{% endif %}
+
+<h5>페이지네이션</h5>
+    <div>
+        <!-- 이전페이지 -->
+        {% if post_list.has_previous %}
+        <li>
+            <a class="page-link" data-page="{{ post_list.previous_page_number }}"
+           href="javascript:void(0)">이전</a>
+        </li>
+        {% else %}
+        <li>
+            <a tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in post_list.paginator.page_range %}
+        {% if page_number == post_list.number %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" data-page="{{ page_number }}"
+           href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ page_number }}"
+           href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if post_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ post_list.next_page_number }}"
+           href="javascript:void(0)">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </div>

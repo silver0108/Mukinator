@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, update_session_auth_hash, g
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from common.forms import UserForm, UserUpdateForm
+from community.models import Post
+from django.core.paginator import Paginator
 
 
 def signup(request):
@@ -35,6 +37,17 @@ def mypage(request, pk):
     User = get_user_model()
     user = get_object_or_404(User, pk=pk)
     context = {'user': user}
-    print(context)
     return render(request, 'common/mypage.html', context)
+
+
+def mypost(request, pk):
+    post_list = Post.objects.order_by('-create_date')
+    sort = request.GET.get('sort', '')
+    page = request.GET.get('page', 1)
+    User = get_user_model()
+    user = get_object_or_404(User, pk=pk)
+    paginator = Paginator(post_list, 10)
+    page_obj = paginator.get_page(page)
+    context = {'user': user, 'post_list': page_obj, 'page': page, 'sort': sort}
+    return render(request, 'common/mypost.html', context)
 

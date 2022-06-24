@@ -15,4 +15,6 @@
 회원이 아닙니다.
 {% endif %}
 <br>
+<a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
+<br>
 <a href="{% url 'community:index' %}">홈으로</a>
