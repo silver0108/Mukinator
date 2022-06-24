@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from common.models import User
 
-
 class UserForm(UserCreationForm):
     email = forms.EmailField(label="이메일")
     nickname = forms.CharField(max_length=10)
