@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from ..models import Post
 from django.db.models import Q, Count
 
-
 def index(request):
     # 디폴트는 최신순 정렬
     post_list = Post.objects.order_by('-create_date')  # 최신순으로 기본 정렬

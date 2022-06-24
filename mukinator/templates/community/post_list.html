@@ -1,6 +1,7 @@
 {% load community_filter %}
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 <h5>로그인/회원가입/마이페이지</h5>
+<a href="{% url 'mukinator:main' %}">먹키네이터</a>
 {% if user.is_authenticated %}
     <a href="{% url 'common:logout' %}">{{ user.username }}님 안녕하세요! (로그아웃)</a>
     <a href="{% url 'common:mypage' pk=user.pk %}">마이페이지</a>

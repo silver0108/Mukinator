@@ -1,0 +1,29 @@
+<h1>고기 고르기</h1>
+<p>무슨 고기 입니까</p>
+
+<form method="POST" action="{%url 'mukinator:sort_food' %}">
+    {% csrf_token %}
+    <button type="submit" value="돼지" name="meat_type">돼지</button>
+    <button type="submit" value="소" name="meat_type">소</button>
+    <button type="submit" value="닭" name="meat_type">닭</button>
+</form>
+
+<form method="GET" action="{%url 'mukinator:reset' %}">
+    <button type="submit" value=True name="reset">다시하기</button>
+</form>
+<hr>
+
+{% if sort_foods%}
+    {% for food in sort_foods %}
+    <h4>{{food.food_name}}</h4>
+    고기{{food.meat}}
+    해산물{{food.seafood}}
+    매움{{food.hot}}
+    {{food.country}}
+    {{food.meat_type}}
+    {{food.meal_type}}
+    {{food.seafood_type}}
+    {% endfor %}
+{% else %}
+    <h4>결과가  없습니다. 상단의 리셋 버튼을 눌러주세요.</h4>
+{% endif %}

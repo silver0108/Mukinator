@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import Food
 
-admin.site.register(Food)
-
-class NoticeAdmin(admin.ModelAdmin):
-    list_display = ['meat', 'sea', 'spicy', 'country']
-    
+@admin.register(Food)
+class FoodAdmin(admin.ModelAdmin):
+    list_display = ('food_name', 'meat', 'seafood', 'hot', 'country', 'meat_type', 'meal_type', 'seafood_type')

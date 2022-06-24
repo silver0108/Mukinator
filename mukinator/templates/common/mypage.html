@@ -3,8 +3,10 @@
 {% if user.is_authenticated %}
 {{ user.username }}
 {{ user.email }}
-<button type="button" name="update"
-        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
+        <button type="button" name="update"
+                onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
 {% else %}
 회원이 아닙니다.
 {% endif %}
+<br>
+<a href="{% url 'community:index' %}">홈으로</a>

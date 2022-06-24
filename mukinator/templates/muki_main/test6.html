@@ -1,0 +1,34 @@
+<h1>해산물 정하기</h1>
+<p>어떤 종류의 해산물입니까</p>
+
+<form method="POST" action="{%url 'mukinator:sort_food' %}">
+    {% csrf_token %}
+        {% for food in sort_foods %}
+            {% if food.seafood_type == "생선" %}
+                <button type="submit" value="생선" name="seafood_type">생선</button>
+            {% endif %}
+            {% if food.seafood_type == "갑각" %}
+                <button type="submit" value="갑각" name="seafood_type">갑각</button>
+            {% endif %}
+        {% endfor %}    
+</form>
+
+<form method="GET" action="{%url 'mukinator:reset' %}">
+    <button type="submit" value=True name="reset">다시하기</button>
+</form>
+<hr>
+
+{% if sort_foods%}
+    {% for food in sort_foods %}
+    <h4>{{food.food_name}}</h4>
+    고기{{food.meat}}
+    해산물{{food.seafood}}
+    매움{{food.hot}}
+    {{food.country}}
+    {{food.meat_type}}
+    {{food.meal_type}}
+    {{food.seafood_type}}
+    {% endfor %}
+{% else %}
+    <h4>결과가  없습니다. 상단의 리셋 버튼을 눌러주세요.</h4>
+{% endif %}
