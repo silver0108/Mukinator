@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -17,26 +18,38 @@ def main(request):
     specific_number.clear()
     for i in range(4,7):
         specific_number.append(str(i))
+        
     foods = Food.objects.all()
-    return render(request, 'muki_main/main.html', {'foods':foods})
+    sort_foods = Food.objects.none()
+    
+    context = {
+        'foods':foods,
+        'sort_foods':sort_foods
+    }
+    return render(request, 'muki_main/main.html', context)
 
 def start(request):
     
     if 'start' in request.POST:
         integer = random.choice(number)
         number.remove(integer)
-        test_str = 'test'+ integer + '.html'
         
         sort_foods = Food.objects.all()
         qlist['sort_foods'] = sort_foods
         
-        return render(request, 'muki_main/' + test_str , qlist)
+        context = {
+            'sort_foods':qlist,
+            'integer':integer
+        }
+        print(number)
+        return render(request, 'muki_main/main.html', context)
     
 def reset(request):
     
     if 'reset' in request.GET: #초기화
         sort_foods = Food.objects.all()
         qlist['sort_foods'] = sort_foods
+        
         number.clear()
         for i in range(1,4):
             number.append(str(i))
@@ -79,42 +92,49 @@ def sort_food(request):
             if len(number) != 0: #HTML 리스트가 0이 아니면
                 integer = random.choice(number) #HTML 리스트에서 하나 고르고
                 number.remove(integer) #고른 숫자 삭제
-                test_str = 'test'+ integer + '.html' #URL 구성
                 
             elif len(number) == 0 and len(specific_number) != 1: #HTML 리스트가 0이고 세부 질문 HTML 리스트가 1이 아니면
                 integer = random.choice(specific_number) #위와 같은 동작
                 specific_number.remove(integer)
-                test_str = 'test'+ integer + '.html'
                 
             elif len(specific_number) == 1: #세부 질문 HTML 리스트가 1이면
-                integer = random.choice(specific_number) #랜덤으로 숫자 고른 후
-                test_str = 'test'+ integer + '.html' #URL 구성 
+                integer = random.choice(specific_number) #랜덤으로 숫자 고르기
             
             if len(sort_foods) == 1 or len(sort_foods) == 0:#음식이 1개 남거나 없다면
                 value = request.POST[model_name]
                 if value:
-                    sort_foods = sort_foods.filter(**{model_name: value}) #필터링 후
+                    sort_foods = sort_foods.filter(**{model_name: value}) #필터링
                     qlist['sort_foods'] = sort_foods
                     
                     #최근 추천 음식 저장
-                    if request.user.is_authenticated:
-                        Result(
-                            food_name = list(sort_foods)[0],
-                            user = request.user
-                        ).save()
-                    else:
-                        Result(
-                            food_name = list(sort_foods)[0],
-                        ).save()
-                    if request.user.is_authenticated:
+                    if request.user.is_authenticated: #로그인 되어 있으면 user 저장
+                        if len(sort_foods) > 0:
+                            Result(
+                                food_name = list(sort_foods)[0],
+                                user = request.user
+                            ).save()
+                    else: #로그인 안되어 있으면 food_name 만 저장
+                        if len(sort_foods) > 0:
+                            Result(
+                                food_name = list(sort_foods)[0],
+                            ).save()
+                            
+                    if request.user.is_authenticated: #로그인 되어 있으면 user.id 가져오기
                         person = get_object_or_404(User, pk = request.user.id)
-                    else:
+                    else: #아니면 None으로 넘기기
                         person = None
+                        
+                    #pk순으로 정렬 후 food_name 중복 제거
                     results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
-                    context = {'qlist':qlist, 'person':person, 'results':results}
-                return render(request, 'muki_main/result.html', context) #결과창으로
-    
-            return render(request, 'muki_main/' + test_str , qlist)
+                    check = True
+                    context = {'sort_foods':qlist, 'person':person, 'results':results, 'check':check}                   
+                return render(request, 'muki_main/main.html', context) #결과창으로
+            
+            context = {
+                'sort_foods':qlist,
+                'integer':integer
+            }
+            return render(request, 'muki_main/main.html' , context)
     
     
 def go_board(request):
@@ -127,4 +147,3 @@ def go_board(request):
         specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
-    
