@@ -9,6 +9,4 @@ urlpatterns = [
     path('reset', views.reset, name="reset"),
     path('sort_food', views.sort_food, name="sort_food"),
     path('go_borad', views.go_board, name="go_board"),
-    path('result/<int:user_id>', views.result, name="result"),
-
 ]

@@ -10,6 +10,13 @@ number = ['1', '2', '3']
 specific_number = ['4', '5', '6']
 
 def main(request):
+    number.clear()
+    for i in range(1,4):
+        number.append(str(i))
+        
+    specific_number.clear()
+    for i in range(4,7):
+        specific_number.append(str(i))
     foods = Food.objects.all()
     return render(request, 'muki_main/main.html', {'foods':foods})
 
@@ -90,7 +97,6 @@ def sort_food(request):
                     qlist['sort_foods'] = sort_foods
                     
                     #최근 추천 음식 저장
-                    print(request.user)
                     if request.user.is_authenticated:
                         Result(
                             food_name = list(sort_foods)[0],
@@ -104,18 +110,12 @@ def sort_food(request):
                         person = get_object_or_404(User, pk = request.user.id)
                     else:
                         person = None
-                    results = Result.objects.all().filter(user=request.user.id).values("food_name").distinct()
+                    results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
                     context = {'qlist':qlist, 'person':person, 'results':results}
                 return render(request, 'muki_main/result.html', context) #결과창으로
     
             return render(request, 'muki_main/' + test_str , qlist)
     
-def result(request, user_id):
-    person = get_object_or_404(User, pk = user_id)
-    results = Result.objects.all().filter(user=user_id).values("food_name").distinct()
-    print(person)
-    print(results)
-    return render(request, 'muki_main/result_test.html', {'person':person, 'results':results})    
     
 def go_board(request):
     number.clear()
