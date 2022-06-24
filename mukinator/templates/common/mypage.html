@@ -2,9 +2,15 @@
 <br>
 {% if user.is_authenticated %}
 {{ user.username }}
+<br>
+{{ user.nickname }}
+<br>
 {{ user.email }}
-        <button type="button" name="update"
-                onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
+<br>
+{{ user.region }}
+<br>
+<button type="button" name="update"
+        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
 {% else %}
 회원이 아닙니다.
 {% endif %}
