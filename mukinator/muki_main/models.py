@@ -1,8 +1,7 @@
-from ssl import VerifyMode
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
-from django.forms import CharField, ModelChoiceField
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 class Food(models.Model):
     food_name = models.CharField(max_length=10)
@@ -13,6 +12,13 @@ class Food(models.Model):
     meat_type = models.CharField(max_length=2, null=True)
     meal_type = models.CharField(max_length=2, null=True)
     seafood_type = models.CharField(max_length=2, null=True)
+    
+    def __str__(self):
+        return self.food_name
+
+class Result(models.Model):
+    food_name = models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='result', null=True)
     
     def __str__(self):
         return self.food_name

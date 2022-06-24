@@ -1,7 +1,7 @@
 <h1>해산물 정하기</h1>
 <p>어떤 종류의 해산물입니까</p>
 
-<form method="POST" action="{%url 'mukinator:sort_food' %}">
+<form method="POST" action="{%url 'mukinator:sort_food' user_id=user.id %}">
     {% csrf_token %}
         {% for food in sort_foods %}
             {% if food.seafood_type == "생선" %}

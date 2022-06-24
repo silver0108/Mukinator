@@ -1,7 +1,7 @@
 <h1>고기 고르기</h1>
 <p>무슨 고기 입니까</p>
 
-<form method="POST" action="{%url 'mukinator:sort_food' %}">
+<form method="POST" action="{%url 'mukinator:sort_food' user_id=user.id %}">
     {% csrf_token %}
     <button type="submit" value="돼지" name="meat_type">돼지</button>
     <button type="submit" value="소" name="meat_type">소</button>
