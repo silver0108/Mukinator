@@ -8,9 +8,9 @@ qlist = {}
 number = ['1', '2', '3']
 specific_number = ['4', '5', '6']
 
-def home(request):
+def main(request):
     foods = Food.objects.all()
-    return render(request, 'muki_main/home.html', {'foods':foods})
+    return render(request, 'muki_main/main.html', {'foods':foods})
 
 def start(request):
     
@@ -37,7 +37,7 @@ def reset(request):
         for i in range(4,7):
             specific_number.append(str(i))
         
-        return redirect(home)  
+        return redirect('mukinator:main')  
         
 def sort_food(request):
     

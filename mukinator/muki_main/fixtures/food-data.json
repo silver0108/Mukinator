@@ -101,17 +101,6 @@
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"전",
-            "meat":"False",
-            "seafood":"False",
-            "hot":"False",
-            "country":"한식",
-            "meal_type":"기타"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
             "food_name":"칼국수",
             "meat":"False",
             "seafood":"False",
@@ -123,12 +112,12 @@
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"해물찜",
+            "food_name":"양념게장",
             "meat":"False",
             "seafood":"True",
             "hot":"True",
             "country":"한식",
-            "seafood_type":"종합"
+            "seafood_type":"갑각"
 
         }
     },
@@ -152,7 +141,7 @@
             "seafood":"True",
             "hot":"False",
             "country":"한식",
-            "seafood_type":"어패"
+            "seafood_type":"갑각"
         }
     },
     {
@@ -291,23 +280,12 @@
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"해파리냉채",
-            "meat":"False",
-            "seafood":"True",
-            "hot":"False",
-            "country":"중식",
-            "seafood_type":"기타"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
             "food_name":"새우볶음밥",
             "meat":"False",
             "seafood":"True",
             "hot":"False",
             "country":"중식",
-            "seafood_type":"어패"
+            "seafood_type":"갑각"
         }
     },
     {
@@ -391,18 +369,6 @@
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"카이센동",
-            "meat":"False",
-            "seafood":"True",
-            "hot":"False",
-            "country":"일식",
-            "seafood_type":"종합"
-
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
             "food_name":"스테이크",
             "meat":"True",
             "seafood":"False",
@@ -469,23 +435,12 @@
     {
         "model":"muki_main.food",
         "fields":{
-            "food_name":"칠리크랩",
-            "meat":"False",
-            "seafood":"True",
-            "hot":"True",
-            "country":"기타",
-            "seafood_type":"어패"
-        }
-    },
-    {
-        "model":"muki_main.food",
-        "fields":{
             "food_name":"랍스터",
             "meat":"False",
             "seafood":"True",
             "hot":"False",
             "country":"기타",
-            "seafood_type":"어패"
+            "seafood_type":"갑각"
 
         }
     },

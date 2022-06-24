@@ -1,7 +1,15 @@
 <h1>나라 고르기</h1>
+<p>처음 :  아으... 머리야.. 
+    지니녀석.. 갑자기 사라지던데 ..
+    햇볕이 갑자기 따가워 진 것을 당신은 느낍니다. 
+    
+    주위를 둘러보니 당신은 사막의 한복판임을 알았습니다. 
+    저 멀리 보이는 오아시스에서  맛잇는 냄새가 나는것을 느꼈습니다. 
+    이 냄새는 어떤 냄새일까요 ? 
+</p>    
 <p>한식입니까 중식입니까 일식입니까</p>
 
-<form method="POST" action="{%url 'sort_food' %}">
+<form method="POST" action="{%url 'mukinator:sort_food' %}">
     {% csrf_token %}
     <button type="submit" value="한식" name="country">한식</button>
     <button type="submit" value="중식" name="country">중식</button>
@@ -9,7 +17,7 @@
     <button type="submit" value="기타" name="country">기타</button>
 </form>
 
-<form method="GET" action="{%url 'reset' %}">
+<form method="GET" action="{%url 'mukinator:reset' %}">
     <button type="submit" value=True name="reset">다시하기</button>
 </form>
 <hr>
