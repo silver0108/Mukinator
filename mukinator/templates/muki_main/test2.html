@@ -3,7 +3,7 @@
 </p>    
 <p>한식입니까 중식입니까 일식입니까</p>
 
-<form method="POST" action="{%url 'mukinator:sort_food' user_id=user.id %}">
+<form method="POST" action="{%url 'mukinator:sort_food' %}">
     {% csrf_token %}
     <button type="submit" value="한식" name="country">한식</button>
     <button type="submit" value="중식" name="country">중식</button>

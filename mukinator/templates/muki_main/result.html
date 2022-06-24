@@ -8,7 +8,6 @@
         <button type="submit" value=True name="go_board">맛집 추천 받기</button>
 </form>
 {% if qlist.sort_foods %}
-    
     {% for food in qlist.sort_foods %}
         <h2>{{food}}</h2>
     {% endfor %}
@@ -17,14 +16,17 @@
         {% if person.pk == user.pk %}
             <br>
             <h3>최근에 추천한 음식</h3>
+            
             {%for name in results%}
                 {{name.food_name}}
                 <br>
             {% endfor %}
+
         {% else %}
-            허용되지 않은 접근
+            허용되지 않은 접근    
         {% endif %}
     {% endif %}
+
 {% else %}
     <h4>결과가  없습니다. 상단의 리셋 버튼을 눌러주세요.</h4>
 {% endif %}

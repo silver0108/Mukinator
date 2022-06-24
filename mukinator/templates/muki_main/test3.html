@@ -3,7 +3,7 @@
 </p>    
 <p>맵습니까?</p>
 
-<form method="POST" action="{%url 'mukinator:sort_food' user_id=user.id %}">
+<form method="POST" action="{%url 'mukinator:sort_food'%}">
     {% csrf_token %}
     <button type="submit" value=True name="hot">네</button>
     <button type="submit" value=False name="hot">아니요</button>

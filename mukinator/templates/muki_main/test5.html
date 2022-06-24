@@ -1,7 +1,7 @@
 <h1>형태 고르기</h1>
 <p>어떤 형태입니까</p>
 
-<form method="POST" action="{%url 'mukinator:sort_food' user_id=user.id%}">
+<form method="POST" action="{%url 'mukinator:sort_food' %}">
     {% csrf_token %}
     {% for food in sort_foods %}
             {% if food.meal_type == "밥" %}

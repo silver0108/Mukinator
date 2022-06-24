@@ -13,7 +13,7 @@ def main(request):
     foods = Food.objects.all()
     return render(request, 'muki_main/main.html', {'foods':foods})
 
-def start(request, user_id):
+def start(request):
     
     if 'start' in request.POST:
         integer = random.choice(number)
@@ -40,7 +40,7 @@ def reset(request):
         
         return redirect('mukinator:main')  
         
-def sort_food(request, user_id):
+def sort_food(request):
     
     if 'sort_foods' in qlist: #필터링 한 데이터 검사
         sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
@@ -90,12 +90,21 @@ def sort_food(request, user_id):
                     qlist['sort_foods'] = sort_foods
                     
                     #최근 추천 음식 저장
-                    Result(
-                        food_name = list(sort_foods)[0],
-                        user = request.user
-                    ).save()
-                    person = get_object_or_404(User, pk = user_id)
-                    results = Result.objects.all().filter(user=user_id).values("food_name").distinct()
+                    print(request.user)
+                    if request.user.is_authenticated:
+                        Result(
+                            food_name = list(sort_foods)[0],
+                            user = request.user
+                        ).save()
+                    else:
+                        Result(
+                            food_name = list(sort_foods)[0],
+                        ).save()
+                    if request.user.is_authenticated:
+                        person = get_object_or_404(User, pk = request.user.id)
+                    else:
+                        person = None
+                    results = Result.objects.all().filter(user=request.user.id).values("food_name").distinct()
                     context = {'qlist':qlist, 'person':person, 'results':results}
                 return render(request, 'muki_main/result.html', context) #결과창으로
     

@@ -1,6 +1,6 @@
 <h1> 홈 </h1>
 
-<form method="POST" action="{%url 'mukinator:start' user_id=user.id %}">
+<form method="POST" action="{%url 'mukinator:start' %}">
     {% csrf_token %}
     <button type="submit" value=True name="start">시작</button>
 </form>
