@@ -9,6 +9,11 @@
                    value="{{ form.username.value|default_if_none:'' }}">
         </div>
         <div>
+            <label for="nickname">닉네임</label>
+            <input type="text" name="nickname" id="nickname"
+                   value="{{ form.nickname.value|default_if_none:'' }}">
+        </div>
+        <div>
             <label for="password1">비밀번호</label>
             <input type="password" name="password1" id="password1"
                    value="{{ form.password1.value|default_if_none:'' }}">
@@ -22,6 +27,11 @@
             <label for="email">이메일</label>
             <input type="text" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}">
+        </div>
+        <div>
+            <label for="region">주소</label>
+            <input type="text" name="region" id="region"
+                   value="{{ form.region.value|default_if_none:'' }}">
         </div>
         <button type="submit">저장하기</button>
     </form>

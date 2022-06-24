@@ -22,6 +22,9 @@
 <div>
     {{ post.content }}
 </div>
+<br>
+<a href="{% url 'community:index' %}">홈으로</a>
+<br>
 <h5>작성일시</h5>
 {{ post.create_date }}
 <h5>작성자</h5>
