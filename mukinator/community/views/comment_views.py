@@ -39,8 +39,9 @@ def comment_modify(request, comment_id):
             comment.save()
             return redirect('community:detail', post_id=comment.post.id)
     else:
+        check = True
         form = CommentForm(instance=comment)
-    context = {'comment': comment, 'form': form}
+    context = {'comment': comment, 'form': form, 'check': check}
     return render(request, 'community/comment_form.html', context)
 
 

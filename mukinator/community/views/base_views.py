@@ -5,8 +5,8 @@ from django.db.models import Q, Count
 
 
 def index(request):
-    # 디폴트는 최신순 정렬
-    post_list = Post.objects.order_by('-create_date')  # 최신순으로 기본 정렬
+    # 인기글
+    hit_list = Post.objects.all().order_by('-hit')[:2]  # 조회수순으로 2개
     sort = request.GET.get('sort', '')
     page = request.GET.get('page', 1)  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
@@ -32,11 +32,12 @@ def index(request):
         ).distinct()
     paginator = Paginator(post_list, 10)
     page_obj = paginator.get_page(page)
-    context = {'post_list': page_obj, 'page': page, 'sort': sort, 'kw': kw}
+    context = {'post_list': page_obj, 'page': page, 'sort': sort, 'kw': kw, 'hit_list': hit_list}
     return render(request, 'community/post_list.html', context)
 
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    context = {'post': post}
+    check = False
+    context = {'post': post, 'check': check}
     return render(request, 'community/post_detail.html', context)

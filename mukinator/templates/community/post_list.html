@@ -33,7 +33,22 @@
   <option class="sort-gimhae" value="?sort=gimhae">김해</option>
 </select>
 
-<h5>게시물</h5>
+<h5>게시물(상단 2개는 인기글)</h5>
+{% if hit_list %}
+    <ul>
+    {% for post in hit_list %}
+        <li>
+            {{ post.region}} <!-- 지역 -->
+            {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
+            <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
+            {{ post.comment_set.count }} <!-- 댓글 개수 -->
+            {{ post.author.username }} <!-- 작성자 -->
+            {{ post.hit }} <!-- 조회수 -->
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<!-- 일반 게시글 -->
 {% if post_list %}
     <ul>
     {% for post in post_list %}
