@@ -11,4 +11,5 @@ urlpatterns = [
     path('mypage/<int:pk>', views.mypage, name='mypage'),
     path('update/', views.update, name='update'),
     path('mypost/<int:pk>', views.mypost, name='mypost'),
+    path('forget_id/', views.forget_id, name='forget_id'),
 ]

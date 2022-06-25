@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'muki_main',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'common.User'
+
+#이메일 전송
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#메일 호스트 서버
+EMAIL_HOST = 'smtp.naver.com'
+#메일과 통신 포트
+EMAIL_POST = '587'
+#발신할 이메일
+EMAIL_HOST_USER = 'mumat@naver.com'
+EMAIL_HOST_PASSWORD = 'mukinator123!'
+#TLS보안방법
+EMAIL_USE_TLS = True
+#자동응답받을 주소
+DEFAULT_FROM_EMAIL = 'mumat@naver.com'
+
+SERVER_EMAIL = 'mumat@naver.com'

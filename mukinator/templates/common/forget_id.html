@@ -1,0 +1,13 @@
+<h1>아이디 분실</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+    Email: <input type="email" name="email">
+    <input type="submit" name="email_submit">
+
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+
+</form>
