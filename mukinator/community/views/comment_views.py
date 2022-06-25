@@ -28,6 +28,8 @@ def comment_create(request, post_id):
 @login_required(login_url='common:login')
 def comment_modify(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
+    post = get_object_or_404(Post, pk=comment.post.id)
+    check = False
     if request.user != comment.author:
         messages.error(request, '수정권한이 없습니다')
         return redirect('community:detail', comment_id=comment.id)
@@ -41,8 +43,8 @@ def comment_modify(request, comment_id):
     else:
         check = True
         form = CommentForm(instance=comment)
-    context = {'comment': comment, 'form': form, 'check': check}
-    return render(request, 'community/comment_form.html', context)
+    context = {'comment': comment, 'form': form, 'check': check, 'post': post, 'comment_id': comment_id}
+    return render(request, 'community/post_detail.html', context)
 
 
 @login_required(login_url='common:login')

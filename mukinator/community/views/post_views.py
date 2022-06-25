@@ -42,7 +42,7 @@ def post_modify(request, post_id):
             return redirect('community:detail', post_id=post.id)
     else:
         form = PostForm(instance=post)
-    context = {'form': form}
+    context = {'form': form, 'check': True}
     return render(request, 'community/post_form.html', context)
 
 

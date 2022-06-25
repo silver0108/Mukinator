@@ -55,7 +55,7 @@
         {% endfor %}
 </div>
 {% endif %}
-<textarea {% if not user.is_authenticated %}disabled{%endif%} name="content" id="content" rows="15"></textarea>
+<textarea {% if not user.is_authenticated %}disabled{%endif%} name="content" id="create_content" rows="15"></textarea>
 <input type="submit" value="댓글등록">
 </form>
 <h5>{{ post.comment_set.count }}개의 댓글이 있습니다.</h5>
@@ -64,17 +64,33 @@
     {% for comment in post.comment_set.all %}
         <li>
             {{ comment.author.username }}
-            {{ comment.content }}
             {{ comment.create_date }}
-            <!-- 댓글 수정버튼 -->
-            <br>
-            {% if request.user == comment.author %}
-            <a href="{% url 'community:comment_modify' comment.id %}">수정</a>
-            <!-- 댓글 삭제버튼 -->
-            <br>
-            <a href="#" class="delete" data-uri="{% url 'community:comment_delete' comment.id %}">삭제</a>
+            {% if check %}
+                {% if comment.id == comment_id %}
+                <form method="post">
+                    {% csrf_token %}
+                    {% include "form_errors.html" %}
+                    <div class="mb-3">
+                        <label for="content" class="form-label">답변내용</label>
+                        <textarea class="form-control" name="content" id="content"
+                              rows="10">{{ form.content.value }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">저장하기</button>
+                </form>
+                {% else %}
+                    {{ comment.content }}
+                {% endif %}
+            {% else %}
+                {{ comment.content }}
+                    <!-- 댓글 수정버튼 -->
+                    <br>
+                    {% if request.user == comment.author %}
+                        <a href="{% url 'community:comment_modify' comment.id %}">수정</a>
+                        <!-- 댓글 삭제버튼 -->
+                        <br>
+                        <a href="#" class="delete" data-uri="{% url 'community:comment_delete' comment.id %}">삭제</a>
+                    {% endif %}
             {% endif %}
-
         </li>
     {% endfor %}
     </ul>
