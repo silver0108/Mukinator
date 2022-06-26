@@ -1,4 +1,3 @@
-from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -31,6 +30,14 @@ def main(request):
 def start(request):
     
     if 'start' in request.POST:
+        number.clear()
+        for i in range(1,4):
+            number.append(str(i))
+        
+        specific_number.clear()
+        for i in range(4,7):
+            specific_number.append(str(i))
+            
         integer = random.choice(number)
         number.remove(integer)
         
@@ -41,8 +48,7 @@ def start(request):
             'sort_foods':qlist,
             'integer':integer
         }
-        print(number)
-        return render(request, 'muki_main/main.html', context)
+        return render(request, 'muki_main/front.html', context)
     
 def reset(request):
     
@@ -128,13 +134,13 @@ def sort_food(request):
                     results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
                     check = True
                     context = {'sort_foods':qlist, 'person':person, 'results':results, 'check':check}                   
-                return render(request, 'muki_main/main.html', context) #결과창으로
+                return render(request, 'muki_main/front.html', context) #결과창으로
             
             context = {
                 'sort_foods':qlist,
-                'integer':integer
+                'integer':integer,
             }
-            return render(request, 'muki_main/main.html' , context)
+            return render(request, 'muki_main/front.html' , context)
     
     
 def go_board(request):
@@ -147,3 +153,6 @@ def go_board(request):
         specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
+    
+def testpage(request):
+    return render(request, 'muki_main/front.html')

@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script defer src="/static/js/main.js"> </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>먹키네이터</title>
+
+
+</head>
+
+<body>
+  <div id="container-1">
+    <div class="nav-container">
+      <div class="logo">
+        <a class="logo-link" href="{% url 'mukinator:main' %}">Mukkinator</a>
+      </div>
+
+      <div class="list">
+        <ul>
+          <li><a class="list-content" href="{% url 'community:index' %}">게시판</a></li>
+          {% if user.is_authenticated %}
+            <li><a class="list-content" href="{% url 'common:logout' %}">로그아웃</a></li>
+          {% else %}  
+            <li><a class="list-content" href="{% url 'common:login' %}">로그인</a></li>
+          {% endif %}  
+          <li><a class="list-content" href="{% url 'common:signup' %}">회원가입</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="home-container">
+      <div class="left-container">
+        <div class="left-top-container">
+        </div>
+        <div class="left-bottom-container">
+          <form>
+            <a href="#container-2" class="btn start" onclick="typing('.text1')">시작</a>
+            <!-- <button class=" answer" type="button">시작</button> -->
+          </form>
+          <form method="POST" href="#container-2" action="{%url 'mukinator:start' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn start" value=True name="start">시작버튼</button>
+          </form>
+          
+        </div>
+      </div>
+      <div class="right-container">
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div id="container-2">
+    <div class="question-container">
+      <span class="text1"></span>
+    </div>
+    <div class="answer-container">
+      <form>
+        <a href="#container-3" id="btn-1" class="btn answer-1" onclick="typing('.text2')">버튼</a>
+      </form>
+      {% if sort_foods %}
+            <form method="POST" action="{%url 'mukinator:sort_food' %}">
+                {% csrf_token %}
+                    {% if integer == "1" %}
+                        <p>고기입니까?</p>
+                        <button type="submit" onclick="location.href='#container-4';" value=True name="meat">네</button>
+                        <button type="submit" value=False name="meat">아니요</button>
+                        <button type="submit" value=True name="seafood">해산물입니다.</button>
+                    {% endif %}
+                    {% if integer == "2" %}
+                        <p>맵습니까?</p>
+                        <button type="submit" onclick="location.href='#container-4';" value=True name="hot">네</button>
+                        <button type="submit" value=False name="hot">아니요</button>
+                    {% endif %}
+                    {% if integer == "3" %}
+                        <p>한식입니까, 중식입니까, 일식입니까?</p>
+                        <button type="submit" onclick="location.href='#container-4';" value="한식" name="country">한식</button>
+                        <button type="submit" value="중식" name="country">중식</button>
+                        <button type="submit" value="일식" name="country">일식</button>
+                        <button type="submit" value="기타" name="country">기타</button>
+                    {% endif %}
+                    {% if integer == "4" %}
+                        <p>무슨 고기 입니까?</p>
+                        <button type="submit" value="돼지" name="meat_type">돼지</button>
+                        <button type="submit" value="소" name="meat_type">소</button>
+                        <button type="submit" value="닭" name="meat_type">닭</button>
+                    {% endif %}
+                    {% if integer == "5" %}
+                        <p>어떤 형태입니까?</p>
+                        {% for food in sort_foods.sort_foods %}
+                                {% if food.meal_type == "밥" %}
+                                    <button type="submit" value="밥" name="meal_type">밥</button>
+                                {% endif %}    
+                                {% if food.meal_type == "면" %}    
+                                    <button type="submit" value="면" name="meal_type">면</button>
+                                {% endif %}
+                                {% if food.meal_type == "기타" %}
+                                    <button type="submit" value="기타" name="meal_type">기타</button>
+                                {% endif %}
+                        {% endfor %}    
+                    {% endif %}
+                    {% if integer == "6" %}
+                        <p>어떤 종류의 해산물입니까?</p>
+                        {% for food in sort_foods.sort_foods %}
+                            {% if food.seafood_type == "생선" %}
+                                <button type="submit" value="생선" name="seafood_type">생선</button>
+                            {% endif %}
+                            {% if food.seafood_type == "갑각" %}
+                                <button type="submit" value="갑각" name="seafood_type">갑각</button>
+                            {% endif %}
+                        {% endfor %}  
+                    {% endif %}
+            </form>
+            {% endif %}
+    </div>
+  </div>
+
+  <div id="container-3">
+    <div class="question-container">
+      <span class="text2"></span>
+    </div>
+    <div class="answer-container">
+      <form>
+        <a href="#container-4" id="btn-2" class="btn answer-2" onclick="typing('.text3')">버튼</a>
+      </form>
+    </div>
+  </div>
+
+  
+  <div id="container-4">
+    <div class="question-container">
+      <span class="text3"></span>
+    </div>
+    <div class="answer-container">
+      <form>
+        <a href="#container-5" id="btn-3" class="btn answer-3" onclick="typing('.text4')">버튼</a>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="container-5">
+    <div class="question-container">
+      <span class="text4"></span>
+    </div>
+    <div class="answer-container">
+      <form>
+        <a href="#container-6" id="btn-4" class="btn answer-4" onclick="typing('.text5')">버튼</a>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="container-6">
+    <div class="left-container">
+      <div class="left-top-container">
+        <span class="text"></span>
+      </div>
+      <div class="left-bottom-container">
+        <a href="{% url 'mukinator:reset' %}" id='btn-5' class="btn result">다시하기</a>
+        <form method="GET" action="{%url 'mukinator:reset' %}">
+          <button type="submit" value=True name="reset">다시하기</button>
+        </form>
+      </div>
+    </div>
+    <div class="right-container">
+    </div>
+  </div>
+
+  <!-- <script src="./home.js"> </scrip> -->
+
+</body>
+
+</html>
