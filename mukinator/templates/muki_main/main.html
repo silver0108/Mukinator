@@ -11,46 +11,38 @@
                 <button type="submit" value=True name="meat">네</button>
                 <button type="submit" value=False name="meat">아니요</button>
                 <button type="submit" value=True name="seafood">해산물입니다.</button>
-            {% endif %}
-            {% if integer == "2" %}
+            {% elif integer == "2" %}
                 <p>맵습니까?</p>
                 <button type="submit" value=True name="hot">네</button>
                 <button type="submit" value=False name="hot">아니요</button>
-            {% endif %}
-            {% if integer == "3" %}
+            {% elif integer == "3" %}
                 <p>한식입니까, 중식입니까, 일식입니까?</p>
                 <button type="submit" value="한식" name="country">한식</button>
                 <button type="submit" value="중식" name="country">중식</button>
                 <button type="submit" value="일식" name="country">일식</button>
                 <button type="submit" value="기타" name="country">기타</button>
-            {% endif %}
-            {% if integer == "4" %}
+            {% elif integer == "4" %}
                 <p>무슨 고기 입니까?</p>
                 <button type="submit" value="돼지" name="meat_type">돼지</button>
                 <button type="submit" value="소" name="meat_type">소</button>
                 <button type="submit" value="닭" name="meat_type">닭</button>
-            {% endif %}
-            {% if integer == "5" %}
+            {% elif integer == "5" %}
                 <p>어떤 형태입니까?</p>
                 {% for food in sort_foods.sort_foods %}
                         {% if food.meal_type == "밥" %}
                             <button type="submit" value="밥" name="meal_type">밥</button>
-                        {% endif %}    
-                        {% if food.meal_type == "면" %}    
+                        {% elif food.meal_type == "면" %}    
                             <button type="submit" value="면" name="meal_type">면</button>
-                        {% endif %}
-                        {% if food.meal_type == "기타" %}
+                        {% elif food.meal_type == "기타" %}
                             <button type="submit" value="기타" name="meal_type">기타</button>
                         {% endif %}
                 {% endfor %}    
-            {% endif %}
-            {% if integer == "6" %}
+            {% elif integer == "6" %}
                 <p>어떤 종류의 해산물입니까?</p>
                 {% for food in sort_foods.sort_foods %}
                     {% if food.seafood_type == "생선" %}
                         <button type="submit" value="생선" name="seafood_type">생선</button>
-                    {% endif %}
-                    {% if food.seafood_type == "갑각" %}
+                    {% elif food.seafood_type == "갑각" %}
                         <button type="submit" value="갑각" name="seafood_type">갑각</button>
                     {% endif %}
                 {% endfor %}  
@@ -67,7 +59,7 @@
         <button type="submit" value=True name="start">시작</button>
     </form>
 {% endif %}
-    
+
 {%if foods %}
 {% for food_origin in foods %}
     <h4>{{food_origin.food_name}}</h4>

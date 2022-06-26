@@ -48,7 +48,7 @@ def start(request):
             'sort_foods':qlist,
             'integer':integer
         }
-        return render(request, 'muki_main/front.html', context)
+        return render(request, 'muki_main/main.html', context)
     
 def reset(request):
     
@@ -72,10 +72,10 @@ def sort_food(request):
         sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
     else:
         sort_foods = Food.objects.all() #없으면 Food 모델 다 가져오기
-    
+        
     keys = list(request.POST.keys())
     model_name = keys[1]
-        
+    
     if model_name in request.POST: #3번까지 질문하기
         value = request.POST[model_name]
         
@@ -134,14 +134,19 @@ def sort_food(request):
                     results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
                     check = True
                     context = {'sort_foods':qlist, 'person':person, 'results':results, 'check':check}                   
-                return render(request, 'muki_main/front.html', context) #결과창으로
+                return render(request, 'muki_main/main.html', context) #결과창으로
             
             context = {
                 'sort_foods':qlist,
                 'integer':integer,
             }
-            return render(request, 'muki_main/front.html' , context)
-    
+            print(context)
+            request.session['context'] = context['sort_foods']
+            if 'context' in request.session:
+                context = request.session['context']
+                print('context',context)
+            return render(request, 'muki_main/main.html' , context)
+            #return redirect(reverse('mukinator:sort_food', kwargs={'sort_foods' : sort_foods}))
     
 def go_board(request):
     number.clear()
