@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <!-- message 표시 -->
     {% if messages %}
@@ -105,3 +107,4 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 </script>
+{% endblock %}

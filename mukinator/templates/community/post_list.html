@@ -1,112 +1,120 @@
+{% extends 'base.html' %}
 {% load community_filter %}
+{% block content %}
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-<h5>로그인/회원가입/마이페이지</h5>
-<a href="{% url 'mukinator:main' %}">먹키네이터</a>
-{% if user.is_authenticated %}
-    <a href="{% url 'common:logout' %}">{{ user.username }}님 안녕하세요! (로그아웃)</a>
-    <a href="{% url 'common:mypage' pk=user.pk %}">마이페이지</a>
-    {% else %}
-    <a href="{% url 'common:login' %}">로그인</a>
-    <br>
-    <a href="{% url 'common:signup' %}">회원가입</a>
-    {% endif %}
 
-<h5>검색창</h5>
-<div>
-    <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select id="sort-select" onchange="location = this.value;">
+                <option class="sort-all" value="?sort=all">전체</option>
+                <option class="sort-seoul" value="?sort=seoul">서울</option>
+                <option class="sort-suwon" value="?sort=suwon">수원</option>
+                <option class="sort-yongin" value="?sort=yongin">용인</option>
+                <option class="sort-busan" value="?sort=busan">부산</option>
+                <option class="sort-gimhae" value="?sort=gimhae">김해</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'community:post_create' %}" class="btn btn-outline-dark">게시글 등록하기</a>
+        </div>
     </div>
-    <form id="searchForm" method="get" action="{% url 'index' %}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
-    <input type="hidden" id="page" name="page" value="{{ page }}">
-    </form>
-</div>
 
-<h5>지역 셀렉트박스</h5>
-<select id="sort-select" onchange="location = this.value;">
-  <option class="sort-all" value="?sort=all">전체</option>
-  <option class="sort-seoul" value="?sort=seoul">서울</option>
-  <option class="sort-suwon" value="?sort=suwon">수원</option>
-  <option class="sort-yongin" value="?sort=yongin">용인</option>
-  <option class="sort-busan" value="?sort=busan">부산</option>
-  <option class="sort-gimhae" value="?sort=gimhae">김해</option>
-</select>
-
-<h5>게시물(상단 2개는 인기글)</h5>
-{% if hit_list %}
-    <ul>
-    {% for post in hit_list %}
-        <li>
-            {{ post.region}} <!-- 지역 -->
-
-            <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
-            {{ post.comment_set.count }} <!-- 댓글 개수 -->
-            {{ post.author.username }} <!-- 작성자 -->
-            {{ post.hit }} <!-- 조회수 -->
-        </li>
-    {% endfor %}
-    </ul>
-{% endif %}
-<!-- 일반 게시글 -->
-{% if post_list %}
-    <ul>
-    {% for post in post_list %}
-        <li>
-            {{ post.region}} <!-- 지역 -->
-            {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
-            <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
-            {{ post.comment_set.count }} <!-- 댓글 개수 -->
-            {{ post.author.username }} <!-- 작성자 -->
-            {{ post.hit }} <!-- 조회수 -->
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>게시글이 없습니다.</p>
-{% endif %}
-<a href="{% url 'community:post_create' %}">게시글 등록하기</a>
-
-<h5>페이지네이션</h5>
-    <div>
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>지역</th>
+            <th></th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 인기글 -->
+        {% if hit_list %}
+        {% for post in hit_list %}
+        <tr>
+            <td>{{ post.region}}</td>
+            <td>[HOT]</td>
+            <td>
+                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
+            </td>
+            <td>{{ post.author.username }}</td>
+            <td>{{ post.hit }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">게시글이 없습니다.</td>
+        </tr>
+        {% endif %}
+        <!-- 일반 게시글 -->
+        {% if post_list %}
+        {% for post in post_list %}
+        <tr>
+            <td>{{ post.region}}</td>
+            <td>{{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }}</td>
+            <td>
+                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
+            </td>
+            <td>{{ post.author.username }}</td>
+            <td>{{ post.hit }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">게시글이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->
         {% if post_list.has_previous %}
-        <li>
-            <a class="page-link" data-page="{{ post_list.previous_page_number }}"
-           href="javascript:void(0)">이전</a>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ post_list.previous_page_number }}">이전</a>
         </li>
         {% else %}
-        <li>
-            <a tabindex="-1" aria-disabled="true" href="#">이전</a>
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
         </li>
         {% endif %}
         <!-- 페이지리스트 -->
         {% for page_number in post_list.paginator.page_range %}
         {% if page_number == post_list.number %}
         <li class="page-item active" aria-current="page">
-            <a class="page-link" data-page="{{ page_number }}"
-           href="javascript:void(0)">{{ page_number }}</a>
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
         </li>
         {% else %}
         <li class="page-item">
-            <a class="page-link" data-page="{{ page_number }}"
-           href="javascript:void(0)">{{ page_number }}</a>
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
         </li>
         {% endif %}
         {% endfor %}
         <!-- 다음페이지 -->
         {% if post_list.has_next %}
         <li class="page-item">
-            <a class="page-link" data-page="{{ post_list.next_page_number }}"
-           href="javascript:void(0)">다음</a>
+            <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a>
         </li>
         {% else %}
         <li class="page-item disabled">
             <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
         </li>
         {% endif %}
-    </div>
-
+    </ul>
+    <!-- 페이징처리 끝 -->
+</div>
 <br>
 <!-- 검색 스크립트  -->
 <script type='text/javascript'>
@@ -156,3 +164,8 @@ $(document).ready(function(){
   }
 });
 </script>
+<form id="searchForm" method="get" action="{% url 'index' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from .secret import email, email_pw, secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6fyazhpf8na1kmtdbq29&firmf76ju9avbo)p_2g7pxpo2@4g7'
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,13 +137,13 @@ EMAIL_HOST = 'smtp.naver.com'
 #메일과 통신 포트
 EMAIL_POST = '587'
 #발신할 이메일
-EMAIL_HOST_USER = 'mumat@naver.com'
-EMAIL_HOST_PASSWORD = 'mukinator123!'
+EMAIL_HOST_USER = email
+EMAIL_HOST_PASSWORD = email_pw
 #TLS보안방법
 EMAIL_USE_TLS = True
 #자동응답받을 주소
-DEFAULT_FROM_EMAIL = 'mumat@naver.com'
+DEFAULT_FROM_EMAIL = email
 
-SERVER_EMAIL = 'mumat@naver.com'
+SERVER_EMAIL = email
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
