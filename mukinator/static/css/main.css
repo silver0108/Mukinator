@@ -1,0 +1,231 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#container-1 {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../image/genie.png), url(../image/background.jpg);
+  background-size: 60% 110%, cover;
+  background-position: 80% -50px, center;
+  background-repeat: no-repeat;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* .logo-btn {
+  background-color: transparent;
+  margin: 30px;
+  border: 0;
+  cursor: pointer;
+} */
+
+.logo {
+  margin: 30px;
+}
+
+.logo-link {
+  color: #fff;
+  font-size: x-large;
+  text-decoration: none;
+}
+
+.logo-link:active {
+  color: rgb(194, 193, 193);
+}
+
+ul {
+  list-style: none;
+  margin-right: 30px;
+}
+
+li {
+  display: inline;
+  margin-left: 10px;
+}
+
+li>a {
+  color: #fff;
+  font-size: medium;
+}
+
+li>a:active {
+  color: rgb(194, 193, 193);
+  ;
+}
+
+
+
+.home-container {
+  display: flex;
+  /* width: 100vw; */
+  height: 100%;
+}
+
+.left-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.right-container {
+  display: flex;
+  flex: 1;
+}
+
+.left-top-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-bottom-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  color: #fff;
+
+}
+
+.btn {
+  display: block;
+  position: relative;
+  width: 85px;
+  line-height: 35px;
+  font-size: 1em;
+  text-align: center;
+  background-color: #0a052d;
+  color: #fff;
+  border: solid 1px;
+  border-radius: 10px;
+}
+
+.start,
+.result {
+  bottom: 60px;
+}
+
+/* .img {
+  display: flex;
+} */
+
+#container-2 {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url(../image/desert.png), linear-gradient(#2D3343, #324C63, #706E61, #E58A41);
+  background-size: 100% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.question-container {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+}
+
+span {
+  color: #fff;
+  text-align: center;
+}
+
+.answer-1 {
+  left: 200px;
+}
+
+#container-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../image/oasis.png), linear-gradient(#E58A41, #E7CD9A, #B3DECA, #78D3D4);
+  background-size: 100% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.text1 {
+  padding-bottom: 50px;
+}
+
+.text2 {
+  color: #000;
+  padding-bottom: 100px;
+}
+
+.text3 {
+  padding-right: 30px;
+  padding-bottom: 400px;
+}
+
+#container-4 {
+  display: flex;
+  height: 100vh;
+  background: url(../image/thief.png), linear-gradient(#78D3D4, #6194A9, #3C7995, #266584, #003F48, #242A44) no-repeat center;
+  background-size: cover;
+}
+
+.text4 {
+  margin-right: 400px;
+}
+
+#container-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../image/door.png), linear-gradient(#242A44, #3D415E, #6D6888, #9A6555);
+  background-size: 40% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#container-6 {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../image/neuralyzer_genie.png), url(../image/background.jpg);
+  background-size: 60% 110%, cover;
+  background-position: 80% -50px, center;
+  background-repeat: no-repeat;
+}
