@@ -1,4 +1,3 @@
-from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -31,6 +30,14 @@ def main(request):
 def start(request):
     
     if 'start' in request.POST:
+        number.clear()
+        for i in range(1,4):
+            number.append(str(i))
+        
+        specific_number.clear()
+        for i in range(4,7):
+            specific_number.append(str(i))
+            
         integer = random.choice(number)
         number.remove(integer)
         
@@ -41,7 +48,6 @@ def start(request):
             'sort_foods':qlist,
             'integer':integer
         }
-        print(number)
         return render(request, 'muki_main/main.html', context)
     
 def reset(request):
@@ -66,10 +72,10 @@ def sort_food(request):
         sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
     else:
         sort_foods = Food.objects.all() #없으면 Food 모델 다 가져오기
-    
+        
     keys = list(request.POST.keys())
     model_name = keys[1]
-        
+    
     if model_name in request.POST: #3번까지 질문하기
         value = request.POST[model_name]
         
@@ -132,10 +138,15 @@ def sort_food(request):
             
             context = {
                 'sort_foods':qlist,
-                'integer':integer
+                'integer':integer,
             }
+            print(context)
+            request.session['context'] = context['sort_foods']
+            if 'context' in request.session:
+                context = request.session['context']
+                print('context',context)
             return render(request, 'muki_main/main.html' , context)
-    
+            #return redirect(reverse('mukinator:sort_food', kwargs={'sort_foods' : sort_foods}))
     
 def go_board(request):
     number.clear()
@@ -147,3 +158,6 @@ def go_board(request):
         specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
+    
+def testpage(request):
+    return render(request, 'muki_main/front.html')
