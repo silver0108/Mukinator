@@ -1,20 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
 <h5>마이페이지</h5>
-<br>
-{% if user.is_authenticated %}
-{{ user.username }}
-<br>
-{{ user.nickname }}
-<br>
-{{ user.email }}
-<br>
-{{ user.region }}
-<br>
-<button type="button" name="update"
+<div class="container my-3">
+    {% if user.is_authenticated %}
+        <div class="mb-3">
+            {{ user.username }}
+        </div>
+        <div class="mb-3">
+            {{ user.nickname }}
+        </div>
+        <div class="mb-3">
+            {{ user.email }}
+        </div>
+        <div class="mb-3">
+            {{ user.region }}
+        </div>
+        <div class="mb-3">
+            <button type="button" name="update"
         onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
-{% else %}
-회원이 아닙니다.
-{% endif %}
-<br>
-<a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
-<br>
-<a href="{% url 'community:index' %}">홈으로</a>
+        </div>
+        <div class="mb-3">
+            <a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
+        </div>
+    {% else %}
+        회원이 아닙니다.
+    {% endif %}
+    <a href="{% url 'community:index' %}">홈으로</a>
+</div>
+{% endblock %}

@@ -44,8 +44,8 @@
         {% if hit_list %}
         {% for post in hit_list %}
         <tr>
-            <td>{{ post.region}}</td>
             <td>[HOT]</td>
+            <td>{{ post.region}}</td>
             <td>
                 <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
             </td>
