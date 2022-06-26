@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'muki_main',
     'rest_framework',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'mumat@naver.com'
 
 SERVER_EMAIL = 'mumat@naver.com'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.template.loader import render_to_string
-
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm, PasswordChangeForm, AuthenticationForm
+from django.urls import reverse_lazy
 from common.forms import UserForm, UserUpdateForm
 from community.models import Post
 from django.core.paginator import Paginator
@@ -10,6 +12,17 @@ from django.conf import settings
 from django.contrib import messages
 from common.models import User
 from django.core.mail import EmailMessage
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.decorators import method_decorator
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.utils.translation import gettext_lazy as _
+
+
 
 
 def signup(request):
@@ -78,3 +91,41 @@ def forget_id(request):
             messages.info(request, "There is no username along with the email!")
     return render(request, 'common/forget_id.html', context)
 
+
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'common/password_reset_form.html'
+    success_url = reverse_lazy('password_reset_done')
+    form_class = PasswordResetForm
+
+    def form_valid(self, form):
+        if User.objects.filter(email=self.request.POST.get("email")).exists():
+            return super().form_valid(form)
+        else:
+            return render(self.request, 'common/password_reset_done_fail.html')
+
+
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'common/password_reset_done.html'
+
+
+UserModel = get_user_model()
+INTERNAL_RESET_URL_TOKEN = 'set-password'
+INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = SetPasswordForm
+    success_url = reverse_lazy('password_reset_complete')
+    template_name = 'common/password_reset_confirm.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'common/password_reset_complete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = resolve_url(settings.LOGIN_URL)
+        return context
