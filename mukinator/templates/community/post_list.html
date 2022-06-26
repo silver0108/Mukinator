@@ -39,7 +39,7 @@
     {% for post in hit_list %}
         <li>
             {{ post.region}} <!-- 지역 -->
-            {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }} <!-- 게시글 번호 -->
+
             <a href="{% url 'community:detail' post.id %}">{{ post.subject }}</a> <!-- 게시글 제목 -->
             {{ post.comment_set.count }} <!-- 댓글 개수 -->
             {{ post.author.username }} <!-- 작성자 -->
