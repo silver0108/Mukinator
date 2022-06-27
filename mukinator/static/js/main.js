@@ -53,5 +53,3 @@ function typing(query) {
   }
   setInterval(logic, 90)
 }
-
-
