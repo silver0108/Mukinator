@@ -1,27 +1,126 @@
-<h5>마이페이지</h5>
-<div class="container my-3">
-    {% if user.is_authenticated %}
-        <div class="mb-3">
-            {{ user.username }}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Mukinator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+</head>
+<body>
+<!-- 네비게이션바 -->
+    <div class="nav">
+        <div class="col-sm-12">
+            <nav>
+                <ul class="nav_right">
+                    <li><a href="{% url 'community:index' %}">게시판</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'common:mypage' user.id %}">마이페이지</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        {% if not user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                <ul class="nav_left">
+                    <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="mb-3">
-            {{ user.nickname }}
+    </div>
+<!-- 마이페이지 -->
+    <div class="container">
+        <h2>마이페이지</h2><br>
+        <div class="row">
+            <div class="col-sm-4">
+                {% if user.is_authenticated %}
+                <div class="row g-3">
+                    <div class="col-md-9">
+                    <label class="highlight">아이디</label><br>
+                    <label class="form-label">{{ user.username }}</label>
+                    </div>
+                    <br>
+                    <div class="col-md-9">
+                        <label class="highlight">닉네임</label><br>
+                        <label class="form-label">{{ user.nickname }}</label>
+                    </div>
+                    <div class="col-md-9">
+                        <label class="highlight">이메일</label><br>
+                        <label class="form-label">{{ user.email }}</label>
+                    </div>
+                    <div class="col-md-9">
+                        <label class="highlight">지역</label><br>
+                        <label class="form-label">{{ user.region }}</label>
+                    </div>
+                    <div class="col-12">
+                    <button type="button" name="update"
+                        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
+                        <br>
+                        <a href="{% url 'community:index' %}">홈으로</a>
+                    </div>
+                </div>
+                {% else %}
+                    회원이 아닙니다.
+                    <br>
+                    <a href="{% url 'community:index' %}">홈으로</a>
+                {% endif %}
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <img class="img-fluid" src="../../static/image/palace.jpg" alt="">
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            {{ user.email }}
-        </div>
-        <div class="mb-3">
-            {{ user.region }}
-        </div>
-        <div class="mb-3">
-            <button type="button" name="update"
-        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
-        </div>
-        <div class="mb-3">
-            <a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
-        </div>
-    {% else %}
-        회원이 아닙니다.
-    {% endif %}
-    <a href="{% url 'community:index' %}">홈으로</a>
-</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<!--<div class="container my-3">-->
+<!--    {% if user.is_authenticated %}-->
+<!--        <div class="mb-3">-->
+<!--            {{ user.username }}-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            {{ user.nickname }}-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            {{ user.email }}-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            {{ user.region }}-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <button type="button" name="update"-->
+<!--        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>-->
+<!--        </div>-->
+<!--    {% else %}-->
+<!--        회원이 아닙니다.-->
+<!--    {% endif %}-->
+<!--    <a href="{% url 'community:index' %}">홈으로</a>-->
+<!--</div>-->
