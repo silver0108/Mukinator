@@ -53,7 +53,7 @@
         <div class="left-bottom-container">
           <form method="POST" action="{% url 'mukinator:start' %}">
             {% csrf_token %}
-            <button type="submit" class="btn answer-1" value=True name="start">시작버튼</button>
+            <button type="submit" class="btn answer-1" value=True name="start">시작</button>
           </form>
           
         </div>
@@ -74,19 +74,26 @@
     </div>
     <div class="answer-container">
       {% if sort_foods %}
+            {% if integer == "1" %}
+            <p class="question-1">무엇이 보이나요?</p>
+            <br>
+            {% elif integer == "2" %}
+            <p class="question-1">매운 요리가 보이나요?</p>
+            <br>
+            {% elif integer == "3" %}
+            <p class="question-1">어느 나라 음식이 보이나요?</p>
+            <br>
+            {% endif %}
             <form method="POST" action="{% url 'mukinator:sort_food' %}" id='frm'>
                 {% csrf_token %}
                     {% if integer == "1" %}
-                        <p class="question-1">무엇이 보이나요?</p>
                         <button type="submit" class="btn answer-1" value=True name="meat">고기</button>
                         <button type="submit" class="btn answer-1" value=True name="seafood">해산물</button>
                         <button type="submit" class="btn answer-1" value=False name="meat">기타</button>
                     {% elif integer == "2" %}
-                        <p class="question-1">매운 요리가 보이나요?</p>
                         <button type="submit" class="btn answer-1" value=True name="hot">네</button>
                         <button type="submit" class="btn answer-1" value=False name="hot">아니요</button>
                     {% elif integer == "3" %}
-                        <p class="question-1">어느 나라 음식이 보이나요?</p>
                         <button type="submit" class="btn answer-1" value="한식" name="country">한식</button>
                         <button type="submit" class="btn answer-1" value="중식" name="country">중식</button>
                         <button type="submit" class="btn answer-1" value="일식" name="country">일식</button>
@@ -108,19 +115,26 @@
     </div>
     <div class="answer-container">
       {% if sort_foods %}
+            {% if integer == "1" %}
+            <p class="question-1">식재료의 근본은 무엇인가요?</p>
+            <br>
+            {% elif integer == "2" %}
+            <p class="question-1">당신은 매운 음식이 먹고 싶나요?</p>
+            <br>
+            {% elif integer == "3" %}
+            <p class="question-1">당신이 먹고 싶은 음식은 어느 나라 음식인가요?</p>
+            <br>
+            {% endif %}
             <form method="POST" action="{% url 'mukinator:sort_food' %}">
                 {% csrf_token %}
                     {% if integer == "1" %}
-                        <p class="question-1">식재료의 근본은 무엇인가요?</p>
                         <button type="submit" class="btn answer-1" value=True name="meat">고기</button>
                         <button type="submit" class="btn answer-1" value=True name="seafood">해산물</button>
                         <button type="submit" class="btn answer-1" value=False name="meat">기타</button>
                     {% elif integer == "2" %}
-                        <p class="question-1">당신은 매운 음식이 먹고 싶나요?</p>
-                        <button type="submit" class="btn answer-2" value=True name="hot">네</button>
-                        <button type="submit" class="btn answer-2" value=False name="hot">아니요</button>
+                        <button type="submit" class="btn answer-1" value=True name="hot">네</button>
+                        <button type="submit" class="btn answer-1" value=False name="hot">아니요</button>
                     {% elif integer == "3" %}
-                        <p class="question-1">당신이 먹고 싶은 음식은 어느 나라 음식인가요?</p>
                         <button type="submit" class="btn answer-1" value="중식" name="country">중식</button>
                         <button type="submit" class="btn answer-1" value="한식" name="country">한식</button>
                         <button type="submit" class="btn answer-1" value="일식" name="country">일식</button>
@@ -142,19 +156,26 @@
     </div>
     <div class="answer-container">
       {% if sort_foods %}
+            {% if integer == "1" %}
+                  <p class="question-1">식재료의 근본은 무엇인가요?</p>
+                  <br>
+                  {% elif integer == "2" %}
+                  <p class="question-1">당신은 매운 음식이 먹고 싶나요?</p>
+                  <br>
+                  {% elif integer == "3" %}
+                  <p class="question-1">당신이 먹고 싶은 음식은 어느 나라 음식인가요?</p>
+                  <br>
+            {% endif %}
             <form method="POST" action="{% url 'mukinator:sort_food' %}">
                 {% csrf_token %}
                     {% if integer == "1" %}
-                        <p class="question-1">식재료의 근본은 무엇인가요?</p>
                         <button type="submit" class="btn answer-1" value=True name="meat">고기</button>
                         <button type="submit" class="btn answer-1" value=True name="seafood">해산물</button>
                         <button type="submit" class="btn answer-1" value=False name="meat">기타</button>
                     {% elif integer == "2" %}
-                        <p class="question-1">당신은 매운 음식이 먹고 싶나요?</p>
-                        <button type="submit" class="btn answer-2" value=True name="hot">네</button>
-                        <button type="submit" class="btn answer-2" value=False name="hot">아니요</button>
+                        <button type="submit" class="btn answer-1" value=True name="hot">네</button>
+                        <button type="submit" class="btn answer-1" value=False name="hot">아니요</button>
                     {% elif integer == "3" %}
-                        <p class="question-1">당신이 먹고 싶은 음식은 어느 나라 음식인가요?</p>
                         <button type="submit" class="btn answer-1" value="한식" name="country">한식</button>
                         <button type="submit" class="btn answer-1" value="중식" name="country">중식</button>
                         <button type="submit" class="btn answer-1" value="일식" name="country">일식</button>
@@ -176,15 +197,23 @@
     </div>
     <div class="answer-container">
       {% if sort_foods %}
+            {% if integer == "4" %}
+              <p class="question-1">고기 중에 제일 맛있는 고기는 무엇인가요?</p>
+              <br>
+              {% elif integer == "5" %}
+              <p class="question-1">당신을 만족시킬 수 있는 탄수화물은 무엇인가요?</p>
+              <br>
+              {% elif integer == "6" %}
+              <p class="question-1">단단한 껍질이 있나요?</p>
+              <br>
+            {% endif %}
             <form method="POST" action="{% url 'mukinator:sort_food' %}">
               {% csrf_token %}
                     {% if integer == "4" %}
-                        <p class="question-1">고기 중에 제일 맛있는 고기는 무엇인가요?</p>
-                        <button type="submit" class="btn answer-3" value="돼지" name="meat_type">돼지</button>
-                        <button type="submit" class="btn answer-3" value="소" name="meat_type">소</button>
-                        <button type="submit" class="btn answer-3" value="닭" name="meat_type">닭</button>
+                        <button type="submit" class="btn answer-1" value="돼지" name="meat_type">돼지</button>
+                        <button type="submit" class="btn answer-1" value="소" name="meat_type">소</button>
+                        <button type="submit" class="btn answer-1" value="닭" name="meat_type">닭</button>
                     {% elif integer == "5" %}
-                        <p class="question-1">당신을 만족시킬 수 있는 탄수화물은 무엇인가요?</p>
                         {% for food in sort_foods.sort_foods %}
                                 {% if food.meal_type == "밥" %}
                                     <button type="submit" class="btn answer-1" value="밥" name="meal_type">밥</button>
@@ -195,12 +224,11 @@
                                 {% endif %}
                         {% endfor %}    
                     {% elif integer == "6" %}
-                        <p class="question-1">단단한 껍질이 있나요?</p>
                         {% for food in sort_foods.sort_foods %}
                             {% if food.seafood_type == "갑각" %}
-                                <button type="submit" class="btn answer-2" value="갑각" name="seafood_type">네</button>
+                                <button type="submit" class="btn answer-1" value="갑각" name="seafood_type">네</button>
                             {% elif food.seafood_type == "생선" %}
-                                <button type="submit" class="btn answer-2" value="생선" name="seafood_type">아니요</button>
+                                <button type="submit" class="btn answer-1" value="생선" name="seafood_type">아니요</button>
                             {% endif %}
                         {% endfor %}  
                     {% endif %}
@@ -212,7 +240,6 @@
   {% elif qnum == 6 or check == True %}
   <div id="container-6">
     <div class="left-container">
-
       <div class="left-top-container">
         <div class="recommend">추천 음식</div>
         <div>
