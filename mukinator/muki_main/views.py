@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -150,6 +151,8 @@ def sort_food(request):
                         
                     #pk순으로 정렬 후 food_name 중복 제거
                     results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
+                    results = results[:5]
+                    
                     check = True
                     context = {
                         'sort_foods':qlist,
@@ -166,7 +169,6 @@ def sort_food(request):
                 'qnum':qnum,
                 'check':check
             }       
-            
             return render(request, 'muki_main/front.html' , context)
     
 def go_board(request):

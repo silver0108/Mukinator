@@ -37,13 +37,6 @@ a {
   right: 0;
 }
 
-/* .logo-btn {
-  background-color: transparent;
-  margin: 30px;
-  border: 0;
-  cursor: pointer;
-} */
-
 .logo {
   margin: 30px;
 }
@@ -78,8 +71,6 @@ li>a:active {
   ;
 }
 
-
-
 .home-container {
   display: flex;
   /* width: 100vw; */
@@ -98,10 +89,17 @@ li>a:active {
 }
 
 .left-top-container {
-  display: flex;
+  margin-top: 50px;
+  display: inline-grid;
   flex: 1;
-  justify-content: center;
+  color: #fff;
   align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  font-size: xx-large;
+  font-family: 'Jua', sans-serif;
 }
 
 .left-bottom-container {
@@ -109,11 +107,6 @@ li>a:active {
   flex: 1;
   justify-content: center;
   align-items: center;
-}
-
-.question {
-  color: #fff;
-
 }
 
 .btn {
@@ -127,16 +120,14 @@ li>a:active {
   color: #fff;
   border: solid 1px;
   border-radius: 10px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .start,
 .result {
   bottom: 60px;
 }
-
-/* .img {
-  display: flex;
-} */
 
 #container-2 {
   display: flex;
@@ -160,16 +151,36 @@ li>a:active {
   flex: 1;
   justify-content: center;
   align-items: center;
-
 }
 
 span {
-  color: #fff;
   text-align: center;
+  font-size: xx-large;
+  font-family: 'Jua', sans-serif;
 }
 
 .answer-1 {
-  left: 200px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color:#fff;
+  font-family: 'Jua', sans-serif;
+  text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+  font-size: larger;
+}
+
+.question-1 {
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'Jua', sans-serif;
+  font-size: xx-large;
+  text-align: center;
+  text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+
+.button-1 {
+  display: flex;
 }
 
 #container-3 {
@@ -186,16 +197,23 @@ span {
 
 .text1 {
   padding-bottom: 50px;
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 }
 
 .text2 {
-  color: #000;
   padding-bottom: 100px;
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 }
 
 .text3 {
   padding-right: 30px;
   padding-bottom: 400px;
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+}
+
+.text4 {
+  margin-right: 400px;
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 }
 
 #container-4 {
@@ -203,10 +221,6 @@ span {
   height: 100vh;
   background: url(../image/thief.png), linear-gradient(#78D3D4, #6194A9, #3C7995, #266584, #003F48, #242A44) no-repeat center;
   background-size: cover;
-}
-
-.text4 {
-  margin-right: 400px;
 }
 
 #container-5 {
@@ -228,4 +242,14 @@ span {
   background-size: 60% 110%, cover;
   background-position: 80% -50px, center;
   background-repeat: no-repeat;
+}
+
+.result {
+  text-shadow: -2px 0px #0a052d, 0px 2px #0a052d, 2px 0px #0a052d, 0px -2px #0a052d;
+
+}
+
+.recommend {
+  display: flex;
+  text-shadow: -2px 0px #0a052d, 0px 2px #0a052d, 2px 0px #0a052d, 0px -2px #0a052d;
 }
