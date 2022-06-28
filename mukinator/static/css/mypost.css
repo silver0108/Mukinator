@@ -8,20 +8,12 @@
     font-style: normal;
 }
 
-#sort-select {
-    color: black;
-}
-
-.sort-select {
-    color: black;
-}
-
 * {
     font-family: 'EF_hyunygothic';
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: white;
+    color: white; 
 }
 
 body {
@@ -33,9 +25,14 @@ body {
 }
 
 .cardheader {
-    width: 100px;
-
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 5px;
 }
+
+
 /* navbar */
 
     .nav ul li {
@@ -93,38 +90,6 @@ body {
     text-decoration: none;
 }
 
-
-
-
-
-/* 검색부분 */
-.search {
-    float: left;
-    position: relative;
-    text-align: center;
-    width: 400px;
-    margin: 0 auto;
-}
-
-input {
-    width: 100%;
-    border-radius: 20px;
-    border: 1px solid #bbb;
-    margin: 10px 0;
-    padding: 10px 20px;
-    color: black;
-    box-sizing: border-box;
-    font-size: 15px;
-}
-
-.fa-search {
-    position: absolute;
-    right: 15px;
-    top: 17px;
-    margin: 0;
-    color: black;
-}
-
 /* board */
 
 .recent {
@@ -134,9 +99,9 @@ input {
     border-radius: 40px;
     border: 1px solid rgba(248, 244, 244, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    margin-top: 110px;
-
+    margin-top: 5%;
 }
+
 .search {
     width: 30%;
 }
@@ -148,10 +113,6 @@ input {
     height: 60%;
 }
 
-.hot-article td {
-    color:rgb(66, 222, 58);
-    font-weight: bold;
-}
 
 tr, td {
     border-bottom: 1px solid rgb(117, 119, 117);
@@ -190,18 +151,6 @@ button .write {
 button:hover {
     background-color: black;
     color: white;
-}
-
-
-.cardheader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cardheader h2 {
-    font-weight: 600;
-    color: var(--blue);
 }
 
 .write {
