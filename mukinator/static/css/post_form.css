@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'establishRetrosansOTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'YiSunShinDotumM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#sort-select {
+    color: black;
+    width: 50;
+    height: 50;
+}
+
+.sort-select {
+    color: black;
+    width: 50;
+    height: 50;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image: url('../image/galaxy.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    font-family: 'establishRetrosansOTF';
+}
+
+/* navbar */
+
+.nav ul li {
+    
+    font-weight: 300;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav ul li a {
+    
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav {
+    
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 3%;
+    color: white;
+}
+
+.nav_right {
+    padding: 20px;
+    display: flex;
+    float: right;
+    list-style: none;
+}
+
+.nav_left {
+    padding: 20px;
+    display: flex;
+    float: left;
+    list-style: none;
+}
+
+.nav_right li {
+    padding: 0px 10px;
+    color: white;
+}
+
+.nav_right li a {
+    transition: all 0.3s ease 0s;
+} 
+
+.board_wrap {
+    width: 80;
+    height: 10;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 40px;
+    border: 1px solid rgba(216, 204, 204, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 50px;
+    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+
+
+h1 {
+    text-align: center;
+}
+
+button {
+    float: right;
+}
+
+#userInfoContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+#inputTitle {
+    width: 100%;
+    font-size: xx-large;
+}
+
+.board_write_wrap {
+    border-top: 2px solid white;
+}
+
+.board_wrap title {
+    padding: 15px;
+}
+
+.content {
+    margin-top: 10px;
+    border-top: 1px solid white;
+}
+
+.board_write_wrap .content {
+    border-bottom: 1px solid white;
+}
+
+.board_write_wrap .content textarea {
+    display: block;
+    width: 100%;
+    height: 300px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 0;
+    resize: vertical;
+    font-family: 'YiSunShinDotumM';
+
+}
+.upload_btn {
+    float: right;
+}
+
+.board_write_wrap .title dt,
+.board_write_wrap .title dd {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.4rem;
+}
+
+.board_write .title dt {
+    width: 100px;
+}
+
+.board_write .title dd {
+    width: calc(100% - 100px);
+}
+
+.board_write .title dl {
+    margin: 0;
+    
+}
+
+
+.board_write .title input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: 'YiSunShinDotumM';
+}
+
+.board_write .title {
+    padding: 1px;
+    
+}
+
+dl {
+    margin-left: 0;
+}
+
+.pic_wrap {
+    margin-top: 10px;
+}
+
+button {
+    text-decoration: none;
+    list-style: none;
+}
+
+/* 파일 첨부 부분 */
+
+.filebox label {
+    display: inline-block;
+    padding: .3em .75em .2em .75em;
+    color: rgb(255, 255, 255);
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #dd31b5;
+    cursor: pointer;
+    border: none;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    margin-top: 5px;
+}
+
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+/* 제출하기 버튼 */
+
+.submitbox label {
+    display: inline-block;
+    padding: .3em .75em .2em .75em;
+    color: rgb(255, 255, 255);
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #31dd59;
+    cursor: pointer;
+    border: none;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    margin-top: 5px;
+    float: right;
+}
+
+.submitbox input[type="submit"] {  /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}

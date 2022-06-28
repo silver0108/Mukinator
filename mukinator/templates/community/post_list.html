@@ -56,7 +56,7 @@
                 </div>
                 <br>
                 <br>
-                <div class="col-md-6">
+                <div>
                     <select id="sort-select" onchange="location = this.value;">
                         <option class="sort-all sort-select" value="?sort=all">전체</option>
                         <option class="sort-seoul sort-select" value="?sort=seoul">서울</option>
@@ -66,10 +66,10 @@
                         <option class="sort-gimhae sort-select" value="?sort=gimhae">김해</option>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <div class="input-group">
+                <div>
+                    <div class="input-group search">
                         <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-                        <div class="input-group-append">
+                        <div class="input-group-append fas fa-search">
                             <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
                         </div>
                     </div>
@@ -182,7 +182,6 @@
             {% endif %}
         </ul>
     </div>
-
 <!-- 검색 스크립트  -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script type='text/javascript'>

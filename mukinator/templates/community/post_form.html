@@ -1,6 +1,49 @@
-<h1>게시물 등록</h1>
-<br>
-<form method="post" enctype="multipart/form-data">
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Mukinator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/post_form.css' %}">
+</head>
+<body>
+<!-- 네비게이션바 -->
+    <div class="nav">
+        <div class="col-sm-12">
+            <nav>
+                <ul class="nav_right">
+                    <li><a href="{% url 'community:index' %}">게시판</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'common:mypage' user.id %}">마이페이지</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        {% if not user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                <ul class="nav_left">
+                    <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <form method="post" class="board_wrap" enctype="multipart/form-data">
         {% csrf_token %}
          <!-- 오류표시 Start -->
         {% if form.errors %}
@@ -17,26 +60,38 @@
         {% endif %}
         <!-- 오류표시 End -->
         <div class="mb-3">
-            <label for="subject" class="form-label">제목</label>
-            <input type="text" class="form-control" name="subject" id="subject"
-                   value="{{ form.subject.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">사진</label>
-            <input type="file" name="imgs" multiple>
-            <span/>
-            <input type="file" name="imgs" multiple>
-            <span/>
-            <input type="file" name="imgs" multiple>
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea class="form-control" name="content"
-                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
-        </div>
-        <div class="mb-3">
             <label class="form-label">지역</label>
             {{ form.region }}
         </div>
-        <button type="submit">저장하기</button>
-</form>
+        <div class="board_title">
+            <h2>여러분만의 맛집을 소개해주세요 !</h2>
+        </div>
+        <div class="board_write_wrap">
+            <br>
+            <div class="board_write">
+                <div class="title">
+                    <label for="subject" class="form-label">제목</label>
+                    <input type="text" class="form-control" name="subject" id="subject"
+                        value="{{ form.subject.value|default_if_none:'' }}">
+                </div>
+                <div class="content">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control" name="content"
+                            id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+        <label class="form-label">사진</label>
+        <input type="file" name="imgs" multiple>
+        <span/>
+        <input type="file" name="imgs" multiple>
+        <span/>
+        <input type="file" name="imgs" multiple>
+        <div class="submitbox">
+            <label for="submit">제출</label>
+            <input type="submit" id="submit">
+        </div>
+    </form>
+</body>
+</html>
