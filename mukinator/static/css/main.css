@@ -103,10 +103,13 @@ li>a:active {
 }
 
 .left-bottom-container {
-  display: flex;
+  display: grid;
   flex: 1;
   justify-content: center;
   align-items: center;
+  color:#fff;
+  font-family: 'Jua', sans-serif;
+  text-align: center;
 }
 
 .btn {
