@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -8,8 +9,15 @@ User = get_user_model()
 qlist = {}
 number = ['1', '2', '3']
 specific_number = ['4', '5', '6']
+qnum = 1
+check = False
 
 def main(request):
+    global qnum, check
+    
+    qnum = 1
+    check = False
+    
     number.clear()
     for i in range(1,4):
         number.append(str(i))
@@ -23,11 +31,16 @@ def main(request):
     
     context = {
         'foods':foods,
-        'sort_foods':sort_foods
+        'sort_foods':sort_foods,
+        'qnum':qnum,
+        'check':check
     }
-    return render(request, 'muki_main/main.html', context)
+    return render(request, 'muki_main/front.html', context)
 
 def start(request):
+    global qnum, check
+    qnum += 1
+    check = False
     
     if 'start' in request.POST:
         number.clear()
@@ -46,12 +59,14 @@ def start(request):
         
         context = {
             'sort_foods':qlist,
-            'integer':integer
+            'integer':integer,
+            'qnum':qnum,
+            'check':check
         }
-        return render(request, 'muki_main/main.html', context)
-    
+        return render(request, 'muki_main/front.html', context)
 def reset(request):
-    
+    global qnum, check
+    check = False
     if 'reset' in request.GET: #초기화
         sort_foods = Food.objects.all()
         qlist['sort_foods'] = sort_foods
@@ -64,10 +79,14 @@ def reset(request):
         for i in range(4,7):
             specific_number.append(str(i))
         
+        qnum = 1
         return redirect('mukinator:main')  
         
-def sort_food(request):
+def sort_food(request):    
+    global qnum, check
+    qnum += 1
     
+    check = False
     if 'sort_foods' in qlist: #필터링 한 데이터 검사
         sort_foods = qlist['sort_foods'] #있으면 필터링 한 데이터 받아오기
     else:
@@ -132,21 +151,25 @@ def sort_food(request):
                         
                     #pk순으로 정렬 후 food_name 중복 제거
                     results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
+                    results = results[:5]
+                    
                     check = True
-                    context = {'sort_foods':qlist, 'person':person, 'results':results, 'check':check}                   
-                return render(request, 'muki_main/main.html', context) #결과창으로
+                    context = {
+                        'sort_foods':qlist,
+                        'person':person,
+                        'results':results,
+                        'check':check,
+                        'qnum':qnum
+                    }                   
+                return render(request, 'muki_main/front.html', context) #결과창으로
             
             context = {
                 'sort_foods':qlist,
                 'integer':integer,
-            }
-            print(context)
-            request.session['context'] = context['sort_foods']
-            if 'context' in request.session:
-                context = request.session['context']
-                print('context',context)
-            return render(request, 'muki_main/main.html' , context)
-            #return redirect(reverse('mukinator:sort_food', kwargs={'sort_foods' : sort_foods}))
+                'qnum':qnum,
+                'check':check
+            }       
+            return render(request, 'muki_main/front.html' , context)
     
 def go_board(request):
     number.clear()

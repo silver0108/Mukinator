@@ -2,7 +2,8 @@
 <form method="GET" action="{%url 'mukinator:testpage' %}">
         <button type="submit" value=True name="test">테스트</button>
     </form>
-{{sort_foods}}
+qnum {{qnum}}
+check {{check}}
 {% if sort_foods %}
     <form method="POST" action="{%url 'mukinator:sort_food' %}">
         {% csrf_token %}
