@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;1,500&family=Poppins:wght@400;500&family=Raleway:ital,wght@0,400;1,500&family=Ubuntu&display=swap');
+
+
+@font-face {
+    font-family: 'EF_hyunygothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunygothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#sort-select {
+    color: black;
+}
+
+.sort-select {
+    color: black;
+    width: 10%;
+    height: 100%;
+    font-size: 15px;
+    background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+    background-size: 15px;
+    padding: 3px 30px 5px 10px;
+    border-radius: 10px;
+    outline: 0 none;
+}
+* {
+    font-family: 'EF_hyunygothic';
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url('../image/galaxy.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow:inherit
+}
+
+.cardheader {
+    width: 100px;
+
+}
+/* navbar */
+
+    .nav ul li {
+
+        font-weight: 300;
+        font-size: 30px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav ul li a {
+
+        font-weight: 300;
+        font-size: 25px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav {
+
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px 3%;
+        color: white;
+    }
+
+    .nav_right {
+        padding: 20px;
+        display: flex;
+        float: right;
+        list-style: none;
+    }
+
+    .nav_left {
+        padding: 20px;
+        display: flex;
+        float: left;
+        list-style: none;
+    }
+
+    .nav_right li {
+        padding: 0px 10px;
+        color: white;
+    }
+
+    .nav_right li a {
+        transition: all 0.3s ease 0s;
+    }
+
+    a {
+
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+
+
+
+/* 셀렉트 태그 */
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    }
+
+.select {
+    width: 10%;
+    height: 100%;
+    font-size: 15px;
+    background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+    background-size: 15px;
+    padding: 3px 30px 5px 10px;
+    border-radius: 10px;
+    outline: 0 none;
+  }
+  .select option {
+    background: black;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 15px;
+  }
+
+/* 검색부분 */
+.search {
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+}
+
+input {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #bbb;
+    margin: 10px 0;
+    padding: 10px 20px;
+    color: black;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.fa-search {
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    margin: 0;
+    color: black;
+}
+
+/* board */
+
+.recent {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 40px;
+    border: 1px solid rgba(248, 244, 244, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin-top: 110px;
+
+}
+.search {
+    width: 30%;
+}
+
+.board {
+    padding: 5%;
+    margin: 0 0;
+    width: 100%;
+    height: 60%;
+}
+
+.hot-article td {
+    color:rgb(66, 222, 58);
+    font-weight: bold;
+}
+
+tr, td {
+    border-bottom: 1px solid rgb(117, 119, 117);
+    padding: 5px;
+    font-size: 15px;
+}
+
+.board .recent {
+    position: relative;
+    display: grid;
+    min-height: 100;
+    padding: 20px;
+    box-shadow: 0px 7px 25px rgba(0,0,0,08);
+    border-radius: 10px;
+}
+
+button {
+    font-weight: 300;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    float: right;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+button .write {
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.cardheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardheader h2 {
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.write {
+    position: relative;
+    float: right;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+
+.board table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+.board table thead td {
+    font-weight: 600;
+}
+
+.board .recent table tr{
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.board .recent table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
+.status.hot {
+    padding: 2px 4px;
+    background: navy;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 00;
+}
+
+.pagenation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.page {
+    list-style: none;
+    display: flex;
+}
+
+.page .page-left{
+    padding: 2px;
+}
+
+.page .page-right{
+    padding: 2px;
+}
+
+.page .num {
+    list-style: none;
+    display: flex;
+    letter-spacing: 5px;
+    padding: 2px;
+}
+
+.head {
+    font-weight: 600;
+}
+

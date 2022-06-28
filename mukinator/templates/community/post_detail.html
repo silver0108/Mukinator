@@ -1,120 +1,171 @@
-{% extends 'base.html' %}
 {% load community_filter %}
-{% block content %}
-<!-- 조회수+1하기 -->
-{{ post.update_counter }}
-<div class="container my-3">
-    <!-- message 표시 -->
-    {% if messages %}
-    <div class="alert alert-danger my-3" role="alert">
-        {% for message in messages %}
-        <strong>{{ message.tags }}</strong>
-        <ul>
-            <li>{{ message.message }}</li>
-        </ul>
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <title>Mukinator</title>
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+</head>
+<body>
+    <!-- 조회수+1하기 -->
+    {{ post.update_counter }}
+    <!-- 네비게이션바 -->
+    <div class="nav">
+            <div class="col-sm-12">
+                <nav>
+                    <ul class="nav_right">
+                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'common:mypage' user.id %}">마이페이지</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            {% if not user.is_authenticated %}
+                                <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                    <ul class="nav_left">
+                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    </ul>
+                </nav>
+            </div>
+    </div>
+    <div class="container my-3">
+        <!-- message 표시 -->
+        {% if messages %}
+        <div class="alert alert-danger my-3" role="alert">
+            {% for message in messages %}
+            <strong>{{ message.tags }}</strong>
+            <ul>
+                <li>{{ message.message }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 게시글 내용 -->
+        <h2 class="border-bottom py-2">{{ post.subject }}</h2>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    {% for photo in post.photo_set.all%}
+                        <div class="mr-3 mb-3">
+                            <img src="{{photo.image.url}}" width="400">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card-text text-dark">{{ post.content }}</div>
+                <div class="d-flex justify-content-end text-dark">
+                    {% if post.modify_date %}
+                    <div class="badge bg-light text-dark p-2 text-start mx-3">
+                        <div class="mb-2 text-dark">modified at</div>
+                        <div class="mb-2 text-dark">{{ post.modify_date }}</div>
+                    </div>
+                    {% endif %}
+                    <div class="badge bg-light text-dark p-2 text-start">
+                        <div class="mb-2 text-dark">{{ post.author.nickname }}</div>
+                        <div class="mb-2 text-dark">{{ post.create_date }}</div>
+                    </div>
+                </div>
+                <div class="my-3">
+                    {% if request.user == post.author %}
+                    <a href="{% url 'community:post_modify' post.id  %}"
+                       class="btn btn-sm btn-outline-secondary">수정</a>
+                    <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                       data-uri="{% url 'community:post_delete' post.id  %}">삭제</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- 댓글 -->
+        <form action="{% url 'community:comment_create' post.id %}" method="post" class="my-3">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    {% csrf_token %}
+                    {% include "form_errors.html" %}
+                    <div class="mb-3">
+                        <textarea {% if not user.is_authenticated %}disabled{% endif %}
+                                  name="content" id="create_content" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="comment_create">
+                        <input type="submit" value="댓글등록" class="btn btn-primary" style="float: right">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 답변이 있습니다.</h5>
+        <!-- 댓글 루프시작 -->
+        {% for comment in post.comment_set.all %}
+            <a id="comment_{{ comment.id }}"></a>
+            <div class="card my-3">
+                <div class="card-body">
+                    {% if check %}
+                        {% if comment.id == comment_id %}
+                            <form method="post">
+                                {% csrf_token %}
+                                {% include "form_errors.html" %}
+                                <div class="card-text">
+                                    <label for="content" class="form-label">댓글</label>
+                                    <textarea class="form-control text-dark" name="content" id="content"
+                                        rows="3">{{ form.content.value }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">저장하기</button>
+                            </form>
+                        {% else %}
+                            <div class="card-text text-dark">{{ comment.content }}</div>
+                        {% endif %}
+                    {% else %}
+                            <div class="card-text text-dark">{{ comment.content }}</div>
+                            <div class="d-flex justify-content-end">
+                                {% if comment.modify_date %}
+                                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                                    <div class="mb-2 text-dark">modified at</div>
+                                    <div class="mb-2 text-dark">{{ comment.modify_date }}</div>
+                                </div>
+                                {% endif %}
+                                <div class="badge bg-light text-dark p-2 text-start">
+                                    <div class="mb-2 text-dark">{{ comment.author.nickname }}</div>
+                                    <div class="mb-2 text-dark">{{ comment.create_date }}</div>
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                {% if request.user == comment.author %}
+                                <a href="{% url 'community:comment_modify' comment.id  %}"
+                                   class="btn btn-sm btn-outline-secondary">수정</a>
+                                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary "
+                                   data-uri="{% url 'community:comment_delete' comment.id  %}">삭제</a>
+                                {% endif %}
+                            </div>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
     </div>
-    {% endif %}
-    <!-- 게시글 내용 -->
-    <h2 class="border-bottom py-2">{{ post.subject }}</h2>
-    <div class="card my-3">
-        <div class="card-body">
-            <div class="d-flex justify-content-center">
-                {% for photo in post.photo_set.all%}
-                    <div class="mr-3 mb-3">
-                        <img src="{{photo.image.url}}" width="400">
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="card-text">{{ post.content }}</div>
-            <div class="d-flex justify-content-end">
-                {% if post.modify_date %}
-                <div class="badge bg-light text-dark p-2 text-start mx-3">
-                    <div class="mb-2">modified at</div>
-                    <div>{{ post.modify_date }}</div>
-                </div>
-                {% endif %}
-                <div class="badge bg-light text-dark p-2 text-start">
-                    <div class="mb-2">{{ post.author.nickname }}</div>
-                    <div>{{ post.create_date }}</div>
-                </div>
-            </div>
-            <div class="my-3">
-                {% if request.user == post.author %}
-                <a href="{% url 'community:post_modify' post.id  %}"
-                   class="btn btn-sm btn-outline-secondary">수정</a>
-                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
-                   data-uri="{% url 'community:post_delete' post.id  %}">삭제</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <!-- 댓글 -->
-    <form action="{% url 'community:comment_create' post.id %}" method="post" class="my-3">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="mb-3">
-            <textarea {% if not user.is_authenticated %}disabled{% endif %}
-                      name="content" id="create_content" class="form-control" rows="3"></textarea>
-        </div>
-        <input type="submit" value="댓글등록" class="btn btn-primary">
-    </form>
-    <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 답변이 있습니다.</h5>
-    <!-- 댓글 루프시작 -->
-    {% for comment in post.comment_set.all %}
-    <a id="comment_{{ comment.id }}"></a>
-    <div class="card my-3">
-        <div class="card-body">
-            {% if check %}
-                {% if comment.id == comment_id %}
-                    <form method="post">
-                        {% csrf_token %}
-                        {% include "form_errors.html" %}
-                        <div class="card-text">
-                            <label for="content" class="form-label">답변내용</label>
-                            <textarea class="form-control" name="content" id="content"
-                                rows="3">{{ form.content.value }}</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">저장하기</button>
-                    </form>
-                {% else %}
-                    <div class="card-text">{{ comment.content }}</div>
-                {% endif %}
-            {% else %}
-                    <div class="card-text">{{ comment.content }}</div>
-                    <div class="d-flex justify-content-end">
-                        {% if comment.modify_date %}
-                        <div class="badge bg-light text-dark p-2 text-start mx-3">
-                            <div class="mb-2">수정</div>
-                            <div>{{ comment.modify_date }}</div>
-                        </div>
-                        {% endif %}
-                        <div class="badge bg-light text-dark p-2 text-start">
-                            <div class="mb-2">{{ comment.author.nickname }}</div>
-                            <div>{{ comment.create_date }}</div>
-                        </div>
-                    </div>
-                    <div class="my-3">
-                        {% if request.user == comment.author %}
-                        <a href="{% url 'community:comment_modify' comment.id  %}"
-                           class="btn btn-sm btn-outline-secondary">수정</a>
-                        <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary "
-                           data-uri="{% url 'community:comment_delete' comment.id  %}">삭제</a>
-                        {% endif %}
-                    </div>
-            {% endif %}
-        </div>
-    </div>
-    {% endfor %}
-</div>
-<script type='text/javascript'>
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 삭제하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
+    <script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
     });
-});
-</script>
-{% endblock %}
+    </script>
+</body>
+</html>

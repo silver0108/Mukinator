@@ -1,171 +1,236 @@
-{% extends 'base.html' %}
 {% load community_filter %}
-{% block content %}
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-
-
-<div class="container my-3">
-    <div class="row">
-        <div class="col-md-4">
-            <select id="sort-select" onchange="location = this.value;">
-                <option class="sort-all" value="?sort=all">전체</option>
-                <option class="sort-seoul" value="?sort=seoul">서울</option>
-                <option class="sort-suwon" value="?sort=suwon">수원</option>
-                <option class="sort-yongin" value="?sort=yongin">용인</option>
-                <option class="sort-busan" value="?sort=busan">부산</option>
-                <option class="sort-gimhae" value="?sort=gimhae">김해</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <!-- CSS -->
+    <link rel="stylesheet"  href="{% static 'css/post_list.css' %}">
+    <title>board</title>
+</head>
+<body>
+    <!-- 네비게이션바 -->
+        <div class="nav">
+            <div class="col-sm-12">
+                <nav>
+                    <ul class="nav_right">
+                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'common:mypage' user.id %}">마이페이지</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            {% if not user.is_authenticated %}
+                                <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                    <ul class="nav_left">
+                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        <div class="col-md-4">
-            <a href="{% url 'community:post_create' %}" class="btn btn-outline-dark">게시글 등록하기</a>
+    <!-- board -->
+    <div class="container">
+        <div class="board">
+            <div class="recent">
+                <div class="">
+                    <div>
+                        <h1>게시판</h1>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-md-6">
+                    <select id="sort-select" onchange="location = this.value;">
+                        <option class="sort-all sort-select" value="?sort=all">전체</option>
+                        <option class="sort-seoul sort-select" value="?sort=seoul">서울</option>
+                        <option class="sort-suwon sort-select" value="?sort=suwon">수원</option>
+                        <option class="sort-yongin sort-select" value="?sort=yongin">용인</option>
+                        <option class="sort-busan sort-select" value="?sort=busan">부산</option>
+                        <option class="sort-gimhae sort-select" value="?sort=gimhae">김해</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 검색창 -->
+                <form id="searchForm" method="get" action="{% url 'index' %}">
+                    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+                    <input type="hidden" id="page" name="page" value="{{ page }}">
+                </form>
+                <div>
+                    <button>
+                        <a href="{% url 'community:post_create' %}" class="write">글쓰기</a>
+                    </button>
+                </div>
+                <br>
+                <table>
+                    <thead>
+                        <tr class="head">
+                            <td>지역</td>
+                            <td>No</td>
+                            <td>제목</td>
+                            <td>작성자</td>
+                            <td>작성날짜</td>
+                            <td>조회수</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 인기글 -->
+                        {% if hit_list %}
+                        {% for post in hit_list %}
+                        <tr class="hot-article">
+                            <td>{{ post.region}}</td>
+                            <td>[HOT]</td>
+                            <td>
+                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
+                                {% if post.comment_set.count > 0 %}
+                                    <span class="text-info small mx-2">{{ post.comment_set.count }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ post.author.nickname }}</td>
+                            <td>{{ post.create_date }}</td>
+                            <td>{{ post.hit }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">게시글이 없습니다.</td>
+                        </tr>
+                        {% endif %}
+                        <!-- 일반 게시글 -->
+                        {% if post_list %}
+                        {% for post in post_list %}
+                        <tr>
+                            <td>{{ post.region}}</td>
+                            <td>{{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }}</td>
+                            <td>
+                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
+                                {% if post.comment_set.count > 0 %}
+                                    <span class="text-info small mx-2">{{ post.comment_set.count }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ post.author.nickname }}</td>
+                            <td>{{ post.create_date }}</td>
+                            <td>{{ post.hit }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">게시글이 없습니다.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <div class="pagenation">
+        <ul class="page">
+            <!-- 이전페이지 -->
+            {% if post_list.has_previous %}
+            <li>
+                <a href="?page={{ post_list.previous_page_number }}" class="page-left">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-left" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in post_list.paginator.page_range %}
+                    {% if page_number == post_list.number %}
+                    <li class="num active" aria-current="page">
+                        <a class="num" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% else %}
+                    <li class="num">
+                        <a class="num" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            <!-- 다음페이지 -->
+                {% if post_list.has_next %}
+                <li class="page-right">
+                    <a class="page-right" href="?page={{ post_list.next_page_number }}">다음</a>
+                </li>
+            {% else %}
+                <li class="page-right disabled">
+                    <a class="page-right" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 
-    <table class="table">
-        <thead>
-        <tr class="table-dark">
-            <th>지역</th>
-            <th></th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- 인기글 -->
-        {% if hit_list %}
-        {% for post in hit_list %}
-        <tr>
-            <td>[HOT]</td>
-            <td>{{ post.region}}</td>
-            <td>
-                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
-            </td>
-            <td>{{ post.author.username }}</td>
-            <td>{{ post.hit }}</td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="3">게시글이 없습니다.</td>
-        </tr>
-        {% endif %}
-        <!-- 일반 게시글 -->
-        {% if post_list %}
-        {% for post in post_list %}
-        <tr>
-            <td>{{ post.region}}</td>
-            <td>{{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }}</td>
-            <td>
-                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{ post.subject }}</a>
-            </td>
-            <td>{{ post.author.username }}</td>
-            <td>{{ post.hit }}</td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="3">게시글이 없습니다.</td>
-        </tr>
-        {% endif %}
-        </tbody>
-    </table>
-    <!-- 페이징처리 시작 -->
-    <ul class="pagination justify-content-center">
-        <!-- 이전페이지 -->
-        {% if post_list.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ post_list.previous_page_number }}">이전</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-        </li>
-        {% endif %}
-        <!-- 페이지리스트 -->
-        {% for page_number in post_list.paginator.page_range %}
-        {% if page_number == post_list.number %}
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-        {% else %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-        <!-- 다음페이지 -->
-        {% if post_list.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-        </li>
-        {% endif %}
-    </ul>
-    <!-- 페이징처리 끝 -->
-</div>
-<br>
 <!-- 검색 스크립트  -->
-<script type='text/javascript'>
-const page_elements = document.getElementsByClassName("page-link");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
-        document.getElementById('searchForm').submit();
-    });
-});
-const btn_search = document.getElementById("btn_search");
-btn_search.addEventListener('click', function() {
-    document.getElementById('kw').value = document.getElementById('search_kw').value;
-    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
-    document.getElementById('searchForm').submit();
-});
-// get url query string
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+        const page_elements = document.getElementsByClassName("page-link");
+        Array.from(page_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                document.getElementById('page').value = this.dataset.page;
+                document.getElementById('searchForm').submit();
+            });
+        });
+        const btn_search = document.getElementById("btn_search");
+        btn_search.addEventListener('click', function() {
+            document.getElementById('kw').value = document.getElementById('search_kw').value;
+            document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+            document.getElementById('searchForm').submit();
+        });
+        // get url query string
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+        // 정렬방식 셀렉트 박스 유지
+        $(document).ready(function(){
+        var sort = getUrlParameter('sort');
+        if(sort == 'seoul'){
+            $('.sort-seoul').prop('selected', 'selected')
+        }else if(sort == 'suwon'){
+            $('.sort-suwon').prop('selected', 'selected')
+        }else if(sort == 'yongin'){
+            $('.sort-yongin').prop('selected', 'selected')
+        }else if(sort == 'busan'){
+            $('.sort-busan').prop('selected', 'selected')
+        }else if(sort == 'gimhae'){
+            $('.sort-gimhae').prop('selected', 'selected')
+        }else{
+            $('.sort-all').prop('selected', 'selected')
         }
-    }
-};
-// 정렬방식 셀렉트 박스 유지
-$(document).ready(function(){
-  var sort = getUrlParameter('sort');
-  if(sort == 'seoul'){
-    $('.sort-seoul').prop('selected', 'selected')
-  }else if(sort == 'suwon'){
-    $('.sort-suwon').prop('selected', 'selected')
-  }else if(sort == 'yongin'){
-    $('.sort-yongin').prop('selected', 'selected')
-  }else if(sort == 'busan'){
-    $('.sort-busan').prop('selected', 'selected')
-  }else if(sort == 'gimhae'){
-    $('.sort-gimhae').prop('selected', 'selected')
-  }else{
-    $('.sort-all').prop('selected', 'selected')
-  }
-});
-</script>
-<form id="searchForm" method="get" action="{% url 'index' %}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
-    <input type="hidden" id="page" name="page" value="{{ page }}">
-</form>
-{% endblock %}
+        });
+        </script>
+</body>
+</html>

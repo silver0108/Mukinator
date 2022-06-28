@@ -38,7 +38,14 @@ def post_modify(request, post_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.modify_date = timezone.now()
+            Photo.objects.all().delete()
             post.save()
+
+            for img in request.FILES.getlist('imgs'):
+                photo = Photo()
+                photo.post = post
+                photo.image = img
+                photo.save()
             return redirect('community:detail', post_id=post.id)
     else:
         form = PostForm(instance=post)

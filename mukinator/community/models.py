@@ -28,6 +28,7 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
 
 
+
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

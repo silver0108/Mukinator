@@ -1,26 +1,90 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container my-3">
-    <form method="post" action="{% url 'common:login' %}">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="mb-3">
-            <label for="username">사용자ID</label>
-            <input type="text" class="form-control" name="username" id="username"
-                   value="{{ form.username.value|default_if_none:'' }}">
+{% load static %}
+<!doctype html>
+<html lang="ko">
+    <head>
+        <title>Login</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+        <!-- Bootstrap JS -->
+        <script src="{% static 'bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    </head>
+    <body>
+    <!-- 네비게이션바 -->
+        <div class="nav">
+            <div class="col-sm-12">
+                <nav>
+                    <ul class="nav_right">
+                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'common:mypage' user.id %}">마이페이지</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            {% if not user.is_authenticated %}
+                                <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                    <ul class="nav_left">
+                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="password"
-                   value="{{ form.password.value|default_if_none:'' }}">
+    <!-- 로그인 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+
+                    먹키네이터가 당신을 모른다면,<br>
+                    먹키네이터에게 당신을 알려주세요!
+                    <br>
+                    <br>
+                    <br>
+                    <h2>로그인</h2><br>
+                    <form class="row g-3" method="post" action="{% url 'common:login' %}">
+                        {% csrf_token %}
+                        {% include "form_errors.html" %}
+                        <div class="col-md-7">
+                            <label for="username">사용자ID</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                   value="{{ form.username.value|default_if_none:'' }}">
+                        </div>
+                        <div class="col-md-7">
+                            <label for="password">비밀번호</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   value="{{ form.password.value|default_if_none:'' }}">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">로그인</button>
+                        </div>
+                    </form>
+                    <br>
+                    <div class="mb-3">
+                        <a href="{% url 'common:forget_id' %}" style="text-decoration:none">아이디 찾기</a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'common:password_reset' %}" style="text-decoration:none">비밀번호 재설정</a>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="row">
+                        <img class="img-fluid" src="../../static/image/smith.png" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-    </form>
-    <div class="mb-3">
-        <a href="{% url 'common:forget_id' %}">아이디 찾기</a>
-    </div>
-    <div class="mb-3">
-        <a href="{% url 'common:password_reset' %}">비밀번호 재설정</a>
-    </div>
-</div>
-{% endblock %}
+    </body>
+</html>
