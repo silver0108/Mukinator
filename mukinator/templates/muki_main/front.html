@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div id="container-1">
+  <div id="container-1" class="container">
     <div class="nav-container">
       <div class="logo">
         <a class="logo-link" href="{% url 'mukinator:main' %}">Mukkinator</a>
@@ -57,7 +57,7 @@
 
   {% elif qnum == 2 and check == False %}
   
-  <div id="container-2">
+  <div id="container-2" class="container">
     <div class="question-container">
       <span class="text1">
         <script>
@@ -67,7 +67,7 @@
     </div>
     <div class="answer-container">
       {% if sort_foods %}
-            <form method="POST" action="{% url 'mukinator:sort_food' %}">
+            <form method="POST" action="{% url 'mukinator:sort_food' %}" id='frm'>
                 {% csrf_token %}
                     {% if integer == "1" %}
                         <p class="question-1">고기입니까?</p>
@@ -91,7 +91,7 @@
   </div>
 
   {% elif qnum == 3 and check == False %}
-  <div id="container-3">
+  <div id="container-3" class="container">
     <div class="question-container">
       <span class="text2">
         <script>
@@ -119,14 +119,13 @@
                         <button type="submit" class="btn answer-1" value="일식" name="country">일식</button>
                         <button type="submit" class="btn answer-1" value="기타" name="country">기타</button>
                       {% endif %}
-              
             </form>
       {% endif %}
     </div>
   </div>
 
   {% elif qnum == 4 and check == False %}
-  <div id="container-4">
+  <div id="container-4" class="container">
     <div class="question-container">
       <span class="text3">
         <script>
@@ -160,7 +159,7 @@
   </div>
 
   {% elif qnum == 5 and check == False %}
-  <div id="container-5">
+  <div id="container-5" class="container">
     <div class="question-container">
       <span class="text4">
         <script>
@@ -206,7 +205,7 @@
   </div>
 
   {% elif qnum == 6 or check == True %}
-  <div id="container-6">
+  <div id="container-6" class="container">
     <div class="left-container">
 
       <div class="left-top-container">
@@ -225,7 +224,7 @@
       <div class="left-bottom-container">
           {% if user.is_authenticated %}
               {% if person.pk == user.pk %}
-                  <h3>최근에 추천한 음식</h3>
+                  <h3 class="recommend">최근에 추천한 음식</h3>
                   {%for name in results%}
                       {{name.food_name}}
                       <br>
