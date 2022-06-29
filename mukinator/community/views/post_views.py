@@ -39,7 +39,9 @@ def post_modify(request, post_id):
             post = form.save(commit=False)
             post.modify_date = timezone.now()
             post.save()
-
+            for photo in Photo.objects.all():
+                if photo.post == post:
+                    photo.delete()
             for img in request.FILES.getlist('imgs'):
                 photo = Photo()
                 photo.post = post
