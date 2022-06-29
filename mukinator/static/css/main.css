@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;1,500&family=Poppins:wght@400;500&family=Raleway:ital,wght@0,400;1,500&family=Ubuntu&display=swap');
+
+
+@font-face {
+    font-family: 'EF_hyunygothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunygothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*원래 코드*/
 html {
   scroll-behavior: smooth;
 }
@@ -21,11 +32,15 @@ body::-webkit-scrollbar {
   background-size: 60% 110%, cover;
   background-position: 80% -50px, center;
   background-repeat: no-repeat;
+  font-family: 'EF_hyunygothic';
 }
 
 a {
+  font-weight: 300;
+  font-size: 25px;
+  color: white;
   text-decoration: none;
-}
+  }
 
 .nav-container {
   display: flex;
@@ -59,11 +74,18 @@ ul {
 li {
   display: inline;
   margin-left: 10px;
+  font-weight: 300;
+  font-size: 30px;
+  color: white;
+  text-decoration: none;
 }
 
 li>a {
   color: #fff;
-  font-size: medium;
+  font-weight: 300;
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
 }
 
 li>a:active {
@@ -103,10 +125,15 @@ li>a:active {
 }
 
 .left-bottom-container {
-  display: flex;
+  display: grid;
   flex: 1;
   justify-content: center;
   align-items: center;
+  color: #fff;
+  font-family: 'Jua', sans-serif;
+  text-align: center;
+  justify-items: center;
+  align-content: space-around;
 }
 
 .btn {
@@ -151,6 +178,7 @@ li>a:active {
   flex: 1;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 span {
@@ -159,14 +187,31 @@ span {
   font-family: 'Jua', sans-serif;
 }
 
+form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .answer-1 {
-  display: inline-flex;
   justify-content: center;
   align-items: center;
   color:#fff;
   font-family: 'Jua', sans-serif;
   text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
   font-size: larger;
+  position: relative;
+  width: 85px;
+  line-height: 35px;
+  font-size: 1em;
+  text-align: center;
+  background-color: #0a052d;
+  color: #fff;
+  border: solid 1px;
+  border-radius: 10px;
 }
 
 .question-1 {
@@ -179,9 +224,6 @@ span {
   text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 
-.button-1 {
-  display: flex;
-}
 
 #container-3 {
   display: flex;
@@ -212,6 +254,11 @@ span {
 }
 
 .text4 {
+  margin-right: 400px;
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+}
+
+.text5 {
   margin-right: 400px;
   text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 }

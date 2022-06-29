@@ -150,7 +150,7 @@ def sort_food(request):
                         person = None
                         
                     #pk순으로 정렬 후 food_name 중복 제거
-                    results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
+                    results = Result.objects.filter(user=request.user.id).order_by("-pk").values("food_name").distinct()
                     results = results[:5]
                     
                     check = True
