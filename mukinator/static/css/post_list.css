@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;1,500&family=Poppins:wght@400;500&family=Raleway:ital,wght@0,400;1,500&family=Ubuntu&display=swap');
 
+@font-face {
+    font-family: 'establishRetrosansOTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'EF_hyunygothic';
@@ -38,8 +44,12 @@ body {
 }
 /* navbar */
 
-    .nav ul li {
+    #nav {
+    font-family: 'establishRetrosansOTF';
+    }
 
+    .nav ul li {
+        font-family: 'establishRetrosansOTF';
         font-weight: 300;
         font-size: 30px;
         color: white;
@@ -47,7 +57,7 @@ body {
     }
 
     .nav ul li a {
-
+        font-family: 'establishRetrosansOTF';
         font-weight: 300;
         font-size: 25px;
         color: white;
@@ -55,7 +65,7 @@ body {
     }
 
     .nav {
-
+        font-family: 'establishRetrosansOTF';
         justify-content: flex-end;
         align-items: center;
         padding: 10px 3%;
@@ -63,6 +73,7 @@ body {
     }
 
     .nav_right {
+        font-family: 'establishRetrosansOTF';
         padding: 20px;
         display: flex;
         float: right;
@@ -70,6 +81,7 @@ body {
     }
 
     .nav_left {
+        font-family: 'establishRetrosansOTF';
         padding: 20px;
         display: flex;
         float: left;
@@ -77,16 +89,18 @@ body {
     }
 
     .nav_right li {
+        font-family: 'establishRetrosansOTF';
         padding: 0px 10px;
         color: white;
     }
 
     .nav_right li a {
+        font-family: 'establishRetrosansOTF';
         transition: all 0.3s ease 0s;
     }
 
     a {
-
+    font-family: 'establishRetrosansOTF';
     font-weight: 300;
     font-size: 25px;
     color: white;

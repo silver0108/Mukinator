@@ -119,8 +119,15 @@ button {
     font-size: xx-large;
 }
 
+.board_wrap {
+    margin-right: 80px;
+    margin-left: 80px;
+}
+
 .board_write_wrap {
     border-top: 2px solid white;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 .board_wrap title {
@@ -252,4 +259,9 @@ button {
     overflow: hidden;
     clip:rect(0,0,0,0);
     border: 0;
+}
+
+.board_wrap {
+    margin-right: 80px;
+    margin-left: 80px;
 }

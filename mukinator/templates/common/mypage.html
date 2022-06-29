@@ -18,7 +18,9 @@
         <div class="col-sm-12">
             <nav>
                 <ul class="nav_right">
-                    <li><a href="{% url 'community:index' %}">게시판</a></li>
+                    <li>
+                        <a class="nav-link" href="{% url 'community:index' %}">게시판</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
