@@ -109,7 +109,7 @@
             </div>
 
         </form>
-        <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 답변이 있습니다.</h5>
+        <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 댓글이 있습니다.</h5>
         <!-- 댓글 루프시작 -->
         {% for comment in post.comment_set.all %}
             <a id="comment_{{ comment.id }}"></a>
