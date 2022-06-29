@@ -1,4 +1,3 @@
-from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Food, Result
 from community.views.base_views import index
@@ -150,7 +149,7 @@ def sort_food(request):
                         person = None
                         
                     #pk순으로 정렬 후 food_name 중복 제거
-                    results = Result.objects.filter(user=request.user.id).order_by('-pk').values("food_name").distinct()
+                    results = Result.objects.filter(user=request.user.id).order_by("-pk").values("food_name").distinct()
                     results = results[:5]
                     
                     check = True
@@ -181,6 +180,3 @@ def go_board(request):
         specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
-    
-def testpage(request):
-    return render(request, 'muki_main/front.html')
