@@ -38,7 +38,6 @@ def post_modify(request, post_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.modify_date = timezone.now()
-            Photo.objects.all().delete()
             post.save()
 
             for img in request.FILES.getlist('imgs'):

@@ -21,7 +21,9 @@
             <div class="col-sm-12">
                 <nav>
                     <ul class="nav_right">
-                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        <li>
+                            <a class="nav-link" href="{% url 'community:index' %}">게시판</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
@@ -41,7 +43,7 @@
                         </li>
                     </ul>
                     <ul class="nav_left">
-                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                        <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
                     </ul>
                 </nav>
             </div>
@@ -69,7 +71,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="card-text text-dark">{{ post.content }}</div>
+                <div class="card-text text-dark" style="white-space:pre;">{{ post.content }}</div>
                 <div class="d-flex justify-content-end text-dark">
                     {% if post.modify_date %}
                     <div class="badge bg-light text-dark p-2 text-start mx-3">
@@ -109,7 +111,7 @@
             </div>
 
         </form>
-        <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 답변이 있습니다.</h5>
+        <h5 class="border-bottom my-3 py-2">{{post.comment_set.count}}개의 댓글이 있습니다.</h5>
         <!-- 댓글 루프시작 -->
         {% for comment in post.comment_set.all %}
             <a id="comment_{{ comment.id }}"></a>
@@ -125,6 +127,7 @@
                                     <textarea class="form-control text-dark" name="content" id="content"
                                         rows="3">{{ form.content.value }}</textarea>
                                 </div>
+                                <br>
                                 <button type="submit" class="btn btn-primary">저장하기</button>
                             </form>
                         {% else %}

@@ -18,7 +18,9 @@
             <div class="col-sm-12">
                 <nav>
                     <ul class="nav_right">
-                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        <li>
+                            <a class="nav-link" href="{% url 'community:index' %}">게시판</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
@@ -38,7 +40,7 @@
                         </li>
                     </ul>
                     <ul class="nav_left">
-                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                        <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
                     </ul>
                 </nav>
             </div>
@@ -81,7 +83,7 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="row">
-                        <img class="img-fluid" src="../../static/image/smith.png" alt="">
+                        <img class="img-fluid" src="{% static 'image/smith.png' %}" alt="">
                     </div>
                 </div>
             </div>

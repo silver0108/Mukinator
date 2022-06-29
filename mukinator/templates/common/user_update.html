@@ -20,7 +20,9 @@
             <div class="col-sm-12">
                 <nav>
                     <ul class="nav_right">
-                        <li><a href="{% url 'community:index' %}">게시판</a></li>
+                        <li>
+                            <a class="nav-link" href="{% url 'community:index' %}">게시판</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
@@ -40,7 +42,7 @@
                         </li>
                     </ul>
                     <ul class="nav_left">
-                        <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                        <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
                     </ul>
                 </nav>
             </div>
@@ -63,7 +65,8 @@
                                    value="{{ form.nickname.value|default_if_none:'' }}">
                         </div>
                         <div class="col-md-7">
-                            <label for="password1">비밀번호</label>
+                            <label for="password1">비밀번호</label><br>
+                            ( 영문 + 숫자 8자 이상 )
                             <input type="password" name="password1" id="password1"
                                    value="{{ form.password1.value|default_if_none:'' }}">
                         </div>
@@ -83,7 +86,7 @@
                                    value="{{ form.region.value|default_if_none:'' }}">
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">회원가입</button>
+                            <button type="submit" class="btn btn-primary">저장하기</button>
                         </div>
                     </form>
                 </div>
