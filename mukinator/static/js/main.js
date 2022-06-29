@@ -38,6 +38,11 @@ function typing(query) {
     \n 잘 보이진  않지만, 낮익은 사람이 질문을 합니다.\
     \n\n 당신은 __ 이 먹고싶을 것입니다.\
     \n 그렇죠?"
+  } else if (query == ".text6") {
+    content =
+        "안녕, 나는 먹키네이터야.\
+      \n 거기 너, 뭐 먹고싶은지 궁금해서 온 거 맞지?\
+      \n 그렇다면 저기 있는 시작 버튼을 눌러봐!"
   }
 
   const text = document.querySelector(query);
