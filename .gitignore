@@ -4,6 +4,9 @@ secret.py
 # Created by https://www.toptal.com/developers/gitignore/api/django,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,venv
 
+###백업 폴더###
+main_backup/
+
 ### Django ###
 *.log
 *.pot
