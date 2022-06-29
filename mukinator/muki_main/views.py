@@ -181,6 +181,3 @@ def go_board(request):
         specific_number.append(str(i))
     if 'go_board' in request.GET:
         return redirect(index)
-    
-def testpage(request):
-    return render(request, 'muki_main/front.html')
