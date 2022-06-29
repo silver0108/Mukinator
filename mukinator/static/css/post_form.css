@@ -11,6 +11,10 @@
     font-style: normal;
 }
 
+#combo {
+    font-family: 'establishRetrosansOTF';
+}
+
 #sort-select {
     color: black;
     width: 50;

@@ -40,7 +40,7 @@
                     </li>
                 </ul>
                 <ul class="nav_left">
-                    <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
                 </ul>
             </nav>
         </div>
@@ -62,7 +62,7 @@
         {% endif %}
         <!-- 오류표시 End -->
         <div class="board_write_wrap">
-            <div class="mb-3">
+            <div class="mb-3 combo">
                 <br>
                 <label class="form-label">지역</label>
                 {{ form.region }}
