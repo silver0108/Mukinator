@@ -4,7 +4,7 @@
 ##### [Jia Kwon](https://github.com/jia5232)
 ##### [Cheon-SungKyu](https://github.com/mumat0103)
 
-### frontend
+### Frontend
 ##### [youra-0526](https://github.com/youra-0526)
 ##### [Soeun Kim](https://github.com/silver0108)
 
