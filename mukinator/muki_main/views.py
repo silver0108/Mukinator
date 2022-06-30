@@ -13,7 +13,7 @@ check = False
 
 def main(request):
     global qnum, check
-    
+
     qnum = 1
     check = False
     
@@ -40,7 +40,6 @@ def start(request):
     global qnum, check
     qnum += 1
     check = False
-    
     if 'start' in request.POST:
         number.clear()
         for i in range(1,4):
@@ -171,6 +170,7 @@ def sort_food(request):
             return render(request, 'muki_main/front.html' , context)
     
 def go_board(request):
+    
     number.clear()
     for i in range(1,4):
         number.append(str(i))
@@ -178,5 +178,6 @@ def go_board(request):
     specific_number.clear()
     for i in range(4,7):
         specific_number.append(str(i))
+    
     if 'go_board' in request.GET:
         return redirect(index)
