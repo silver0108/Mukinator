@@ -7,7 +7,7 @@ from common.models import User
 class UserForm(UserCreationForm):
     email = forms.EmailField(label="이메일")
     nickname = forms.CharField(max_length=10)
-    region = forms.CharField(max_length=10)
+    region = forms.CharField(max_length=20)
 
     class Meta:
         model = User

@@ -11,16 +11,49 @@
     font-style: normal;
 }
 
-#sort-select {
-    color: black;
-    width: 50;
-    height: 50;
+@font-face {
+    font-family: 'EF_hyunygothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunygothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.sort-select {
-    color: black;
-    width: 50;
-    height: 50;
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    }
+
+.select {
+    width: 10%;
+    height: 30px;
+    font-size: 15px;
+    background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+    background-size: 15px;
+    padding: 3px 30px 5px 10px;
+    border-radius: 10px;
+    outline: 0 none;
+    font-family: 'EF_hyunygothic';
+    color: white;
+  }
+  .select option {
+    background: black;
+    color: #fff;
+    padding: 3px 0;
+    font-size: 15px;
+  }
+
+dl {
+    margin-left: 0;
+}
+
+.pic_wrap {
+    margin-top: 10px;
+}
+
+button {
+    text-decoration: none;
+    list-style: none;
 }
 
 body {
@@ -119,8 +152,15 @@ button {
     font-size: xx-large;
 }
 
+.board_wrap {
+    margin-right: 80px;
+    margin-left: 80px;
+}
+
 .board_write_wrap {
     border-top: 2px solid white;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 .board_wrap title {
@@ -252,4 +292,9 @@ button {
     overflow: hidden;
     clip:rect(0,0,0,0);
     border: 0;
+}
+
+.board_wrap {
+    margin-right: 80px;
+    margin-left: 80px;
 }

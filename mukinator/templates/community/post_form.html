@@ -18,7 +18,9 @@
         <div class="col-sm-12">
             <nav>
                 <ul class="nav_right">
-                    <li><a href="{% url 'community:index' %}">게시판</a></li>
+                    <li>
+                        <a class="nav-link" href="{% url 'community:index' %}">게시판</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'common:logout' %}">{{ user.nickname }}님 안녕하세요! (로그아웃)</a>
@@ -38,7 +40,7 @@
                     </li>
                 </ul>
                 <ul class="nav_left">
-                    <li><a href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
                 </ul>
             </nav>
         </div>
@@ -59,14 +61,15 @@
         </div>
         {% endif %}
         <!-- 오류표시 End -->
-        <div class="mb-3">
-            <label class="form-label">지역</label>
-            {{ form.region }}
-        </div>
-        <div class="board_title">
-            <h2>여러분만의 맛집을 소개해주세요 !</h2>
-        </div>
         <div class="board_write_wrap">
+            <div class="mb-3 combo" id="select">
+                <br>
+                <label class="form-label">지역</label>
+                {{ form.region }}
+            </div>
+            <div class="board_title">
+                <h2>여러분만의 맛집을 소개해주세요 !</h2>
+            </div>
             <br>
             <div class="board_write">
                 <div class="title">
@@ -82,15 +85,17 @@
             </div>
         </div>
         <br>
-        <label class="form-label">사진</label>
-        <input type="file" name="imgs" multiple>
-        <span/>
-        <input type="file" name="imgs" multiple>
-        <span/>
-        <input type="file" name="imgs" multiple>
-        <div class="submitbox">
+        <div class="board_write_wrap">
+            <br>
+            <label class="form-label">사진</label>
+            <input type="file" name="imgs" multiple>
+            <span/>
+            <input type="file" name="imgs" multiple>
+            <span/>
+            <div class="submitbox">
             <label for="submit">제출</label>
             <input type="submit" id="submit">
+        </div>
         </div>
     </form>
 </body>

@@ -134,9 +134,9 @@ AUTH_USER_MODEL = 'common.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #메일 호스트 서버
-EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST = 'smtp.gmail.com'
 #메일과 통신 포트
-EMAIL_POST = 465
+EMAIL_POST = 587
 #발신할 이메일
 EMAIL_HOST_USER = email
 EMAIL_HOST_PASSWORD = email_pw
@@ -144,7 +144,7 @@ EMAIL_HOST_PASSWORD = email_pw
 EMAIL_USE_TLS = True
 #자동응답받을 주소
 DEFAULT_FROM_EMAIL = email
-
 SERVER_EMAIL = email
 
+#크리스피
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

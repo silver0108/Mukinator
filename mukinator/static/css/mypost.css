@@ -206,18 +206,14 @@ button:hover {
 }
 
 .page .page-left{
-    padding: 2px;
+    padding-right: 5px;
 }
 
-.page .page-right{
-    padding: 2px;
-}
 
 .page .num {
     list-style: none;
     display: flex;
-    letter-spacing: 5px;
-    padding: 2px;
+    letter-spacing: 6px;
 }
 
 .head {
