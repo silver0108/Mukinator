@@ -100,10 +100,8 @@ class UserPasswordResetView(PasswordResetView):
 
     def form_valid(self, form):
         if User.objects.filter(email=self.request.POST.get("email")).exists():
-            print("if")
             return super().form_valid(form)
         else:
-            print("else")
             return render(self.request, 'common/password_reset_done_fail.html')
 
 
