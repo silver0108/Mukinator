@@ -278,7 +278,7 @@ button:hover {
 .page .num {
     list-style: none;
     display: flex;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
 }
 
 .head {
