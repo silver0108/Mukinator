@@ -144,7 +144,7 @@ EMAIL_HOST_PASSWORD = email_pw
 EMAIL_USE_TLS = True
 #자동응답받을 주소
 DEFAULT_FROM_EMAIL = email
-
 SERVER_EMAIL = email
 
+#크리스피
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
