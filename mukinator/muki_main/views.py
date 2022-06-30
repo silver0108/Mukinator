@@ -40,7 +40,6 @@ def start(request):
     global qnum, check
     qnum += 1
     check = False
-    print(type(qlist))
     if 'start' in request.POST:
         number.clear()
         for i in range(1,4):
