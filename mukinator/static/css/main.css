@@ -204,7 +204,7 @@ form {
   text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
   font-size: larger;
   position: relative;
-  width: 85px;
+  width: auto;
   line-height: 35px;
   font-size: 1em;
   text-align: center;
