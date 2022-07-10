@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <!-- 검색창 -->
-                <form id="searchForm" method="get" action="{% url 'index' %}">
+                <form id="searchForm" method="get" action="{% url 'community:index' %}">
                     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
                     <input type="hidden" id="page" name="page" value="{{ page }}">
                 </form>
@@ -111,8 +111,8 @@
                             <td>{{ post.region}}</td>
                             <td>[HOT]</td>
                             <td>
-                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{
-                                    post.subject }}</a>
+                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">
+                                    {{ post.subject }}</a>
                                 {% if post.comment_set.count > 0 %}
                                 <span class="text-info small mx-2">{{ post.comment_set.count }}</span>
                                 {% endif %}
@@ -135,8 +135,8 @@
                             <td>{{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter0|add:1 }}
                             </td>
                             <td>
-                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">{{
-                                    post.subject }}</a>
+                                <a href="{% url 'community:detail' post.id %}" style="text-decoration:none">
+                                    {{ post.subject }}</a>
                                 {% if post.comment_set.count > 0 %}
                                 <span class="text-info small mx-2">{{ post.comment_set.count }}</span>
                                 {% endif %}
