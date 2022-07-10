@@ -8,7 +8,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mukinator/', include('muki_main.urls')),
+    path('', include('muki_main.urls')),
     path('community/', include('community.urls')),
     path('common/', include('common.urls')),
     path('', base_views.index, name='index'),

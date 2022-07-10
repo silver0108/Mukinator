@@ -62,6 +62,7 @@ def start(request):
             'check':check
         }
         return render(request, 'muki_main/front.html', context)
+        
 def reset(request):
     global qnum, check
     check = False
@@ -112,15 +113,15 @@ def sort_food(request):
             sort_foods = sort_foods.filter(**{model_name: value})
             qlist['sort_foods'] = sort_foods
             
-            if len(number) != 0: #HTML 리스트가 0이 아니면
-                integer = random.choice(number) #HTML 리스트에서 하나 고르고
+            if len(number) != 0: #리스트가 0이 아니면
+                integer = random.choice(number) #리스트에서 하나 고르고
                 number.remove(integer) #고른 숫자 삭제
                 
-            elif len(number) == 0 and len(specific_number) != 1: #HTML 리스트가 0이고 세부 질문 HTML 리스트가 1이 아니면
+            elif len(number) == 0 and len(specific_number) != 1: #리스트가 0이고 세부 질문 리스트가 1이 아니면
                 integer = random.choice(specific_number) #위와 같은 동작
                 specific_number.remove(integer)
                 
-            elif len(specific_number) == 1: #세부 질문 HTML 리스트가 1이면
+            elif len(specific_number) == 1: #세부 질문 리스트가 1이면
                 integer = random.choice(specific_number) #랜덤으로 숫자 고르기
             
             if len(sort_foods) == 1 or len(sort_foods) == 0:#음식이 1개 남거나 없다면
