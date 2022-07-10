@@ -1,6 +1,7 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>Mukinator</title>
     <!-- Required meta tags -->
@@ -12,8 +13,9 @@
     <script src="{% static 'bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
 </head>
+
 <body>
-<!-- 네비게이션바 -->
+    <!-- 네비게이션바 -->
     <div class="nav">
         <div class="col-sm-12">
             <nav>
@@ -35,17 +37,19 @@
                     {% endif %}
                     <li>
                         {% if not user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+                        <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
                         {% endif %}
                     </li>
                 </ul>
                 <ul class="nav_left">
-                    <li><a class="nav-link" href="{% url 'mukinator:main' %}">Mukkinator</a></li>
+                    <li><a class="nav-link" href="{% url 'mukinator:main' %}"><img class="logo-img"
+                                src="{% static 'image/logo.png' %}" style="width:60%; height:60%; margin:-20px;"></a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </div>
-<!-- 마이페이지 -->
+    <!-- 마이페이지 -->
     <div class="container">
         <h2>마이페이지</h2><br>
         <div class="row">
@@ -53,8 +57,8 @@
                 {% if user.is_authenticated %}
                 <div class="row g-3">
                     <div class="col-md-9">
-                    <label class="highlight">아이디</label><br>
-                    <label class="form-label">{{ user.username }}</label>
+                        <label class="highlight">아이디</label><br>
+                        <label class="form-label">{{ user.username }}</label>
                     </div>
                     <br>
                     <div class="col-md-9">
@@ -70,8 +74,8 @@
                         <label class="form-label">{{ user.region }}</label>
                     </div>
                     <div class="col-12">
-                    <button type="button" name="update"
-                        onClick="location.href='{% url 'common:update'%}'">회원정보 수정</button>
+                        <button type="button" name="update" onClick="location.href='{% url 'common:update'%}'">회원정보
+                            수정</button>
                     </div>
                     <div class="col-md-9">
                         <a href="{% url 'common:mypost' pk=user.pk %}">내가 쓴 글</a>
@@ -80,9 +84,9 @@
                     </div>
                 </div>
                 {% else %}
-                    회원이 아닙니다.
-                    <br>
-                    <a href="{% url 'community:index' %}">홈으로</a>
+                회원이 아닙니다.
+                <br>
+                <a href="{% url 'community:index' %}">홈으로</a>
                 {% endif %}
             </div>
             <div class="col-sm-8">
@@ -93,4 +97,5 @@
         </div>
     </div>
 </body>
+
 </html>
