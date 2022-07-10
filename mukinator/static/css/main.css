@@ -2,10 +2,10 @@
 
 
 @font-face {
-    font-family: 'EF_hyunygothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunygothic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'EF_hyunygothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunygothic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*원래 코드*/
@@ -29,8 +29,8 @@ body::-webkit-scrollbar {
   width: 100vw;
   height: 100vh;
   background-image: url(../image/genie.png), url(../image/background.jpg);
-  background-size: 60% 110%, cover;
-  background-position: 80% -50px, center;
+  background-size: 40% 100%, cover;
+  background-position: 70% -10px, center;
   background-repeat: no-repeat;
   font-family: 'EF_hyunygothic';
 }
@@ -40,7 +40,7 @@ a {
   font-size: 25px;
   color: white;
   text-decoration: none;
-  }
+}
 
 .nav-container {
   display: flex;
@@ -64,6 +64,13 @@ a {
 
 .logo-link:active {
   color: rgb(194, 193, 193);
+}
+
+.logo-img {
+  width: 52%;
+  height: 52%;
+  margin-top: -12px;
+  margin-left: 32px;
 }
 
 ul {
@@ -199,7 +206,7 @@ form {
 .answer-1 {
   justify-content: center;
   align-items: center;
-  color:#fff;
+  color: #fff;
   font-family: 'Jua', sans-serif;
   text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
   font-size: larger;
@@ -291,9 +298,9 @@ form {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-image: url(../image/neuralyzer_genie.png), url(../image/background.jpg);
-  background-size: 60% 110%, cover;
-  background-position: 80% -50px, center;
+  background-image: url(../image/genie.png), url(../image/background.jpg);
+  background-size: 40% 100%, cover;
+  background-position: 70% -10px, center;
   background-repeat: no-repeat;
 }
 

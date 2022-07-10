@@ -3,9 +3,9 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-  }
-  
-  body {
+}
+
+body {
     min-height: 100vh;
     overflow-x: hidden;
     background-image: url('../image/galaxy.jpg');
@@ -13,8 +13,8 @@
     background-size: cover;
     color: white;
     font-family: 'establishRetrosansOTF';
-  
-  }
+
+}
 
 .img-fluid {
     width: 120%;
@@ -36,54 +36,54 @@
 
 /* navbar */
 
-    .nav ul li {
+.nav ul li {
 
-        font-weight: 300;
-        font-size: 30px;
-        color: white;
-        text-decoration: none;
-    }
+    font-weight: 300;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+}
 
-    .nav ul li a {
+.nav ul li a {
 
-        font-weight: 300;
-        font-size: 25px;
-        color: white;
-        text-decoration: none;
-    }
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
 
-    .nav {
+.nav {
 
-        justify-content: flex-end;
-        align-items: center;
-        padding: 10px 3%;
-        color: white;
-    }
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 3%;
+    color: white;
+}
 
-    .nav_right {
-        padding: 20px;
-        display: flex;
-        float: right;
-        list-style: none;
-    }
+.nav_right {
+    padding: 20px;
+    display: flex;
+    float: right;
+    list-style: none;
+}
 
-    .nav_left {
-        padding: 20px;
-        display: flex;
-        float: left;
-        list-style: none;
-    }
+.nav_left {
+    padding: 20px;
+    display: flex;
+    float: left;
+    list-style: none;
+}
 
-    .nav_right li {
-        padding: 0px 10px;
-        color: white;
-    }
+.nav_right li {
+    padding: 0px 10px;
+    color: white;
+}
 
-    .nav_right li a {
-        transition: all 0.3s ease 0s;
-    }
+.nav_right li a {
+    transition: all 0.3s ease 0s;
+}
 
-    a {
+a {
 
     font-weight: 300;
     font-size: 25px;
