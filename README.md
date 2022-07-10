@@ -18,4 +18,3 @@
 ### 배포된 서비스
 http://mukinator.pythonanywhere.com/community/
 
-※ 지니 이미지 저작권으로 인해 임시적으로 서비스를 중단하였습니다.
