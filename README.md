@@ -36,7 +36,6 @@
 ##### [유저관련+게시판 기능](https://star-peanuts.tistory.com/43)
 ##### [먹키네이터 기능](https://star-peanuts.tistory.com/44)
 <br/>
-<br/>
 
 
 ## 시연 영상 링크 (이미지 교체 전)
@@ -49,7 +48,7 @@
 - HTML
 - CSS
 - Javascript
-
+<br/>
 
 ## 배포된 서비스 (이미지 저작권 이슈로 서비스를 닫아놓은 상태입니다.)
 http://mukinator.pythonanywhere.com/community/
